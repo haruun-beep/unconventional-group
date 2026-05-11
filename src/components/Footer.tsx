@@ -19,7 +19,7 @@ export default function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-3 group w-fit">
               <Image
-                src="/logo.svg"
+                src="/logo.jpg"
                 alt="Unconventional Group"
                 width={52}
                 height={52}

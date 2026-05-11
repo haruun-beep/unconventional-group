@@ -45,7 +45,7 @@ export default function Nav() {
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
-              src="/logo.svg"
+              src="/logo.jpg"
               alt="Unconventional Group"
               width={68}
               height={68}
@@ -112,7 +112,7 @@ export default function Nav() {
           >
             {/* Mobile logo */}
             <div className="absolute top-3 left-5">
-              <Image src="/logo.svg" alt="Unconventional Group" width={58} height={58} className="h-[58px] w-[58px]" />
+              <Image src="/logo.jpg" alt="Unconventional Group" width={58} height={58} className="h-[58px] w-[58px]" />
             </div>
 
             <nav className="flex flex-col gap-6">

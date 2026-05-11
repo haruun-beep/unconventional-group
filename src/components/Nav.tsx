@@ -43,18 +43,15 @@ export default function Nav() {
       >
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center group">
             <Image
               src="/logo.svg"
               alt="Unconventional Group"
-              width={42}
-              height={42}
-              className="h-10 w-10 transition-all duration-300 group-hover:drop-shadow-[0_0_8px_#39FF14]"
+              width={68}
+              height={68}
+              className="h-[68px] w-[68px] transition-all duration-300 group-hover:drop-shadow-[0_0_14px_#39FF14]"
               priority
             />
-            <span className="hidden sm:block font-display text-base tracking-[0.2em] text-white group-hover:text-neon transition-colors leading-none">
-              UNCONVENTIONAL GROUP
-            </span>
           </Link>
 
           {/* Desktop links */}
@@ -114,9 +111,8 @@ export default function Nav() {
             className="fixed inset-0 z-40 bg-bg flex flex-col justify-center px-10"
           >
             {/* Mobile logo */}
-            <div className="absolute top-4 left-6 flex items-center gap-3">
-              <Image src="/logo.svg" alt="Unconventional Group" width={36} height={36} />
-              <span className="font-display text-sm tracking-[0.2em] text-white">UNCONVENTIONAL GROUP</span>
+            <div className="absolute top-3 left-5">
+              <Image src="/logo.svg" alt="Unconventional Group" width={58} height={58} className="h-[58px] w-[58px]" />
             </div>
 
             <nav className="flex flex-col gap-6">

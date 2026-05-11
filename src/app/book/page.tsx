@@ -16,7 +16,7 @@ export default function BookPage() {
             <h1 className="font-display text-6xl md:text-8xl text-white leading-tight mb-4">
               LET&apos;S TALK ABOUT YOUR BUSINESS.
             </h1>
-            <p className="text-muted text-lg">
+            <p className="text-white/60 text-lg">
               Free 20-minute call. No pitch. We look at what you&apos;ve got and tell you exactly what
               we&apos;d do.
             </p>
@@ -42,7 +42,7 @@ export default function BookPage() {
             <div className="flex items-center justify-center h-[600px] text-center px-8">
               <div>
                 <p className="font-display text-3xl text-neon mb-4">CALENDLY EMBED</p>
-                <p className="text-muted text-sm max-w-sm">
+                <p className="text-white/50 text-sm max-w-sm">
                   Drop your Calendly link in{" "}
                   <code className="text-neon bg-bg/50 px-1 py-0.5 rounded text-xs">
                     src/app/book/page.tsx

@@ -15,7 +15,7 @@ export default function TestimonialCard({ name, company, quote }: Props) {
       <p className="text-white/85 text-sm leading-relaxed mb-5">"{quote}"</p>
       <div>
         <p className="font-semibold text-white text-sm">{name}</p>
-        <p className="text-muted text-xs">{company}</p>
+        <p className="text-white/50 text-xs">{company}</p>
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ import CTASection from "@/components/CTASection";
 
 const stats = [
   { value: "50+", label: "Businesses Served" },
-  { value: "3", label: "Services, One Team" },
+  { value: "4", label: "Services, One Team" },
   { value: "14 Days", label: "Avg. Site Delivery" },
   { value: "Canada-Wide", label: "Reach" },
 ];
@@ -32,7 +32,7 @@ const services = [
   },
   {
     title: "Ad Management",
-    tagline: "$70 in ad spend. 5 booked jobs. That's what we do with Facebook & Instagram ads.",
+    tagline: "Facebook & Instagram ads that book real jobs — not just likes.",
     price: "Starting from $500/mo + ad spend",
     href: "/ad-management",
   },
@@ -46,17 +46,17 @@ const testimonials = [
   },
   {
     name: "John Rwihangana",
-    company: "Google Review",
+    company: "Mesh Moving Services",
     quote: "Over the past week with $70 in ad spend, they helped us book 5 additional jobs! I would highly recommend them for managing your ads.",
   },
   {
     name: "Dana Schick",
-    company: "Google Review",
+    company: "DS Drywall Services",
     quote: "Loved how easy the team at Unconventional Media made the entire process! Communication was always clear and they made a fantastic site for my business. Thanks again guys!",
   },
   {
     name: "Dini Arkangelo",
-    company: "Demolition Company",
+    company: "Zebra Demolition",
     quote: "We hired Unconventional Group to build our website for our demolition company, and they did an excellent job. They were responsive, detail-oriented, and very easy to work with. The final product turned out great — I would definitely work with them again.",
   },
 ];
@@ -89,7 +89,7 @@ export default function Home() {
           <AnimateOnScroll>
             <h2 className="font-display text-5xl md:text-6xl text-bg mb-3 text-center">WHAT WE DO</h2>
             <p className="text-bg/60 text-center mb-14 max-w-xl mx-auto">
-              Three services. One team. Everything in-house.
+              Four services. One team. Everything in-house.
             </p>
           </AnimateOnScroll>
 
@@ -117,13 +117,14 @@ export default function Home() {
         <div className="max-w-3xl mx-auto text-center">
           <AnimateOnScroll>
             <h2 className="font-display text-5xl md:text-7xl text-white leading-tight mb-8">
-              MOST AGENCIES TAKE YOUR MONEY AND DISAPPEAR.
+              WE BUILD IT. YOU OWN IT. WE STAY.
             </h2>
             <p className="text-white/60 text-lg leading-relaxed">
-              We&apos;ve worked with 50+ businesses across Canada. We know what a bad agency looks like
-              because our clients came from them. No templates handed off as custom work. No ghost-mode
-              after the invoice. No &ldquo;we&apos;ll get to it next sprint.&rdquo; You get a team that treats your
-              brand like it&apos;s their own — because our reputation is on the line every time we deliver.
+              Edmonton-based. 50+ businesses served. We&apos;ve built for demolition companies,
+              electricians, caterers, contractors, rockabilly bands — across every industry.
+              Every project is done in-house. No outsourcing. No disappearing after the invoice.
+              You talk to us directly and we treat your brand like our reputation is on the line —
+              because it is.
             </p>
           </AnimateOnScroll>
         </div>
@@ -155,7 +156,7 @@ export default function Home() {
       >
         <div className="max-w-3xl mx-auto text-center">
           <AnimateOnScroll>
-            <p className="font-display text-xs text-bg/50 tracking-[0.3em] mb-4">SISTER COMPANY</p>
+            <p className="font-display text-xs text-bg/50 tracking-[0.3em] mb-4">BROTHER COMPANY</p>
             <h2 className="font-display text-4xl md:text-5xl text-bg mb-6 leading-tight">
               RUNNING YOUR BUSINESS ON MANUAL WORK? OUR BROTHER COMPANY BUILT THE FIX.
             </h2>

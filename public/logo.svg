@@ -1,56 +1,58 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
-  <!-- Background -->
-  <circle cx="200" cy="200" r="200" fill="#0a0a0a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" fill="none">
+  <!-- Black background circle -->
+  <circle cx="250" cy="250" r="250" fill="#000000"/>
 
   <!-- Outer ring -->
-  <circle cx="200" cy="200" r="192" stroke="#39FF14" stroke-width="5"/>
+  <circle cx="250" cy="250" r="238" stroke="#39FF14" stroke-width="3"/>
   <!-- Inner ring -->
-  <circle cx="200" cy="200" r="148" stroke="#39FF14" stroke-width="2.5"/>
+  <circle cx="250" cy="250" r="218" stroke="#39FF14" stroke-width="2"/>
+  <!-- Inner content ring -->
+  <circle cx="250" cy="250" r="185" stroke="#39FF14" stroke-width="2.5"/>
 
   <defs>
-    <!-- Top arc at midpoint of ring band: r=(192+148)/2=170 -->
-    <path id="topArc" d="M 30,200 A 170,170 0 0,1 370,200"/>
-    <!-- Bottom arc at inner ring: r=148 -->
-    <path id="botArc" d="M 52,200 A 148,148 0 0,0 348,200"/>
+    <!-- Top arc for "Unconventional": r=228 (between outer two rings) -->
+    <path id="topArc" d="M 22,250 A 228,228 0 0,1 478,250"/>
+    <!-- Bottom arc for "Group": r=228, going under -->
+    <path id="botArc" d="M 22,250 A 228,228 0 0,0 478,250"/>
   </defs>
 
-  <!-- Stars at ring band midpoint (r=170) at equator -->
-  <text x="28" y="209" fill="#39FF14" font-size="22" text-anchor="middle" font-family="sans-serif">★</text>
-  <text x="372" y="209" fill="#39FF14" font-size="22" text-anchor="middle" font-family="sans-serif">★</text>
+  <!-- Stars in ring band -->
+  <text x="18" y="260" fill="#39FF14" font-size="22" text-anchor="middle" font-family="sans-serif">★</text>
+  <text x="482" y="260" fill="#39FF14" font-size="22" text-anchor="middle" font-family="sans-serif">★</text>
 
-  <!-- Top arc text: UNCONVENTIONAL -->
+  <!-- "Unconventional" — mixed case, top arc -->
   <text
     fill="#39FF14"
-    font-size="26"
-    font-family="'Arial Black', 'Arial Bold', Arial, sans-serif"
-    font-weight="900"
-    letter-spacing="3.5"
+    font-size="40"
+    font-family="'Trebuchet MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+    font-weight="700"
+    letter-spacing="1"
   >
-    <textPath href="#topArc" startOffset="50%" text-anchor="middle">UNCONVENTIONAL</textPath>
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">Unconventional</textPath>
   </text>
 
   <!-- Large U monogram -->
   <text
-    x="200" y="282"
+    x="250" y="335"
     fill="#39FF14"
-    font-size="180"
-    font-family="'Arial Black', 'Arial Bold', Arial, sans-serif"
+    font-size="230"
+    font-family="'Trebuchet MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
     font-weight="900"
     text-anchor="middle"
   >U</text>
 
-  <!-- Bottom arc text: GROUP -->
+  <!-- "Group" — mixed case, bottom arc -->
   <text
     fill="#39FF14"
-    font-size="30"
-    font-family="'Arial Black', 'Arial Bold', Arial, sans-serif"
-    font-weight="900"
-    letter-spacing="14"
+    font-size="44"
+    font-family="'Trebuchet MS', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif"
+    font-weight="700"
+    letter-spacing="5"
   >
-    <textPath href="#botArc" startOffset="50%" text-anchor="middle">GROUP</textPath>
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">Group</textPath>
   </text>
 
-  <!-- Decorative inner arcs below U -->
-  <path d="M 105,322 A 102,30 0 0,0 295,322" stroke="#39FF14" stroke-width="2.5" opacity="0.5"/>
-  <path d="M 120,340 A 86,24 0 0,0 280,340" stroke="#39FF14" stroke-width="2" opacity="0.35"/>
+  <!-- Decorative sweeping arcs inside centre -->
+  <path d="M 110,370 A 155,55 0 0,0 390,370" stroke="#39FF14" stroke-width="2.5" fill="none"/>
+  <path d="M 130,390 A 130,45 0 0,0 370,390" stroke="#39FF14" stroke-width="2" fill="none" opacity="0.8"/>
 </svg>

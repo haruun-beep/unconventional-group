@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" fill="none">
+  <!-- Background -->
+  <circle cx="200" cy="200" r="200" fill="#0a0a0a"/>
+
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="192" stroke="#39FF14" stroke-width="4.5"/>
+  <!-- Inner ring -->
+  <circle cx="200" cy="200" r="158" stroke="#39FF14" stroke-width="2.5"/>
+
+  <defs>
+    <!-- Top arc: r=175 (mid of ring band 158–192), clockwise over top -->
+    <path id="topArc" d="M 25,200 A 175,175 0 0,1 375,200"/>
+    <!-- Bottom arc: at inner ring r=158, counterclockwise under bottom -->
+    <path id="botArc" d="M 42,200 A 158,158 0 0,0 358,200"/>
+  </defs>
+
+  <!-- Stars in ring band at 9 and 3 o'clock -->
+  <text x="17" y="208" fill="#39FF14" font-size="18" text-anchor="middle" font-family="sans-serif">★</text>
+  <text x="383" y="208" fill="#39FF14" font-size="18" text-anchor="middle" font-family="sans-serif">★</text>
+
+  <!-- Top arc text: UNCONVENTIONAL -->
+  <text fill="#39FF14" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700" letter-spacing="4">
+    <textPath href="#topArc" startOffset="50%" text-anchor="middle">UNCONVENTIONAL</textPath>
+  </text>
+
+  <!-- Large U monogram -->
+  <text
+    x="200" y="288"
+    fill="#39FF14"
+    font-size="210"
+    font-family="'Arial Black', Arial, sans-serif"
+    font-weight="900"
+    text-anchor="middle"
+  >U</text>
+
+  <!-- Bottom arc text: GROUP -->
+  <text fill="#39FF14" font-size="30" font-family="Arial, Helvetica, sans-serif" font-weight="700" letter-spacing="18">
+    <textPath href="#botArc" startOffset="50%" text-anchor="middle">GROUP</textPath>
+  </text>
+
+  <!-- Decorative inner arcs -->
+  <path d="M 114,320 A 90,32 0 0,0 286,320" stroke="#39FF14" stroke-width="2.5" opacity="0.5"/>
+  <path d="M 130,336 A 74,24 0 0,0 270,336" stroke="#39FF14" stroke-width="2" opacity="0.35"/>
+</svg>

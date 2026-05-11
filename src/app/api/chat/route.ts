@@ -17,8 +17,14 @@ Your personality: direct, confident, a bit of personality. Not corporate. Not st
 - Optional maintenance retainer: from $200/mo for ongoing updates.
 
 **Social Media Management**
-- From $800/mo, month-to-month, no long-term lock-in.
+- From $1,500/mo, month-to-month, no long-term lock-in.
 - Includes: content creation (graphics + captions), scheduled & published on time, Instagram + Facebook + LinkedIn, monthly performance recap, strategy adjustments monthly.
+
+**Ad Management (Facebook & Instagram Ads)**
+- From $500/mo management fee + client's own ad spend.
+- We handle full campaign setup, ad creatives, copywriting, audience targeting, daily optimization, and monthly reporting.
+- Real result: one client booked 5 jobs in one week on $70 ad spend.
+- Month-to-month, no contracts, client owns all ad accounts.
 
 **Videography & Photography**
 - From $1,200/mo retainer.

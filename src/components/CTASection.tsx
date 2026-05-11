@@ -19,10 +19,10 @@ export default function CTASection({
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-white mb-6 leading-tight">
             {headline}
           </h2>
-          <p className="text-muted text-lg mb-10">{subhead}</p>
+          <p className="text-white/60 text-lg mb-10">{subhead}</p>
           <Link
             href="/book"
-            className="inline-block bg-neon text-bg font-bold px-10 py-4 rounded text-base hover:bg-neon-dim transition-colors"
+            className="inline-block bg-neon text-bg font-bold px-10 py-4 rounded text-base hover:opacity-90 transition-colors"
           >
             {buttonText}
           </Link>

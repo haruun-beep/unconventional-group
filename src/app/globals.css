@@ -2,10 +2,8 @@
 
 @theme {
   --color-neon: #39FF14;
-  --color-neon-dim: #2dd910;
   --color-bg: #0a0a0a;
   --color-surface: #111111;
-  --color-muted: #555555;
   --font-display: var(--font-bebas);
   --font-body: var(--font-inter);
 }
@@ -29,6 +27,14 @@ body {
 /* Neon glow text effect */
 .glow {
   text-shadow: 0 0 20px #39FF14, 0 0 40px #39FF1466;
+}
+
+/* Grid background for hero sections */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(57, 255, 20, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(57, 255, 20, 0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
 }
 
 /* Diagonal clip helpers */

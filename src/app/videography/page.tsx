@@ -43,16 +43,16 @@ export default function VideographyPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-bg pt-32 pb-24 px-6">
+      <section className="bg-bg pt-32 pb-24 px-6 grid-bg">
         <div className="max-w-4xl mx-auto text-center">
           <AnimateOnScroll>
             <p className="font-display text-sm text-neon tracking-widest mb-4">VIDEO & PHOTO</p>
             <h1 className="font-display text-6xl md:text-8xl text-white leading-tight mb-6">
-              CONTENT THAT ACTUALLY LOOKS LIKE YOUR BRAND.
+              YOUR PHONE CAMERA ISN&apos;T A BRAND STRATEGY.
             </h1>
-            <p className="text-muted text-xl max-w-2xl mx-auto">
-              One shoot. Reels, promos, photos, social content — all of it. Delivered edited and
-              ready to post.
+            <p className="text-white/60 text-xl max-w-2xl mx-auto">
+              We shoot and edit content that looks like you spent 10x what you did.
+              Reels, brand films, product shots, headshots — delivered ready to post.
             </p>
           </AnimateOnScroll>
         </div>
@@ -101,7 +101,7 @@ export default function VideographyPage() {
                 <div className="bg-bg rounded-xl p-8">
                   <p className="font-display text-5xl text-neon/30 mb-3">{step.num}</p>
                   <h3 className="font-display text-2xl text-white mb-3">{step.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{step.body}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{step.body}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -119,18 +119,18 @@ export default function VideographyPage() {
             <div className="bg-surface border border-white/10 rounded-2xl p-10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
                 <div className="text-center">
-                  <p className="text-muted text-sm mb-2">Hiring separately for a day</p>
+                  <p className="text-white/50 text-sm mb-2">Hiring separately for a day</p>
                   <p className="font-display text-4xl text-white/40 line-through">$2,000–$4,000</p>
-                  <p className="text-muted text-xs mt-1">one shoot, one time</p>
+                  <p className="text-white/40 text-xs mt-1">one shoot, one time</p>
                 </div>
-                <div className="text-3xl text-muted">vs</div>
+                <div className="font-display text-3xl text-white/30">VS</div>
                 <div className="text-center">
-                  <p className="text-muted text-sm mb-2">Our monthly retainer</p>
+                  <p className="text-white/50 text-sm mb-2">Our monthly retainer</p>
                   <p className="font-display text-5xl text-neon glow">$1,200/mo</p>
-                  <p className="text-muted text-xs mt-1">content pipeline, year-round</p>
+                  <p className="text-white/40 text-xs mt-1">content pipeline, year-round</p>
                 </div>
               </div>
-              <p className="text-muted text-sm">
+              <p className="text-white/50 text-sm">
                 Your content pipeline stays full. Your feed never goes dry.
               </p>
             </div>
@@ -146,9 +146,9 @@ export default function VideographyPage() {
               FROM A VIDEO CLIENT
             </h2>
             <TestimonialCard
-              name="CLIENT NAME"
-              company="Company Name"
-              quote="Add a testimonial from a video/photo client here. Describe the quality, the process, and the results they saw."
+              name="Brian Manuel"
+              company="Local Business Owner"
+              quote="I hired Ugroup to create our website. Great team, great ideas and easy to work with. I highly recommend them for all website needs."
             />
           </AnimateOnScroll>
         </div>
@@ -159,10 +159,10 @@ export default function VideographyPage() {
         <div className="max-w-2xl mx-auto text-center">
           <AnimateOnScroll>
             <p className="font-display text-5xl text-neon glow mb-2">$1,200/mo</p>
-            <p className="text-muted mb-8">Keep your content pipeline full, year-round.</p>
+            <p className="text-white/50 mb-8">Keep your content pipeline full, year-round.</p>
             <Link
               href="/book"
-              className="inline-block bg-neon text-bg font-bold px-10 py-4 rounded text-base hover:bg-neon-dim transition-colors"
+              className="inline-block bg-neon text-bg font-bold px-10 py-4 rounded text-base hover:opacity-90 transition-colors"
             >
               Book a Free Call
             </Link>

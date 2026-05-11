@@ -26,6 +26,11 @@ const services = [
     title: "Videography",
     body: "Brand films, reels, product shoots. We shoot and edit — you post.",
   },
+  {
+    icon: "📈",
+    title: "Ad Management",
+    body: "Facebook & Instagram ads that actually book jobs. We set it up, run it, optimize it monthly.",
+  },
 ];
 
 const steps = [
@@ -50,14 +55,19 @@ export default function AboutPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-bg pt-32 pb-20 px-6">
+      <section className="bg-bg pt-32 pb-20 px-6 grid-bg">
         <div className="max-w-4xl mx-auto">
           <AnimateOnScroll>
+            <p className="font-display text-sm text-neon tracking-widest mb-4">ABOUT US</p>
             <h1 className="font-display text-6xl md:text-8xl text-white leading-tight mb-6">
               WE&apos;RE UNCONVENTIONAL GROUP.
             </h1>
-            <div className="flex flex-wrap gap-6">
-              {["Edmonton-Based", "50+ Businesses", "Canada-Wide"].map((badge) => (
+            <p className="text-white/60 text-xl max-w-2xl mb-8">
+              Edmonton-based creative agency. We build websites, run social media, and shoot content
+              for businesses that are tired of agencies that disappear after the invoice.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              {["Edmonton-Based", "50+ Businesses Served", "Canada-Wide"].map((badge) => (
                 <span
                   key={badge}
                   className="border border-neon text-neon font-display text-sm tracking-widest px-4 py-1.5 rounded"
@@ -74,7 +84,7 @@ export default function AboutPage() {
       <section className="bg-surface py-20 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimateOnScroll>
-            <div className="flex flex-col gap-6 text-muted text-lg leading-relaxed">
+            <div className="flex flex-col gap-6 text-white/60 text-lg leading-relaxed">
               <p>
                 We started because too many businesses were getting burned — overpriced templates,
                 agencies that ghost, deliverables with no follow-through. We do it differently.
@@ -98,16 +108,16 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto">
           <AnimateOnScroll>
             <h2 className="font-display text-4xl md:text-5xl text-bg text-center mb-14">
-              THREE SERVICES. ONE TEAM.
+              FOUR SERVICES. ONE TEAM.
             </h2>
           </AnimateOnScroll>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {services.map((s, i) => (
               <AnimateOnScroll key={s.title} delay={i * 0.1}>
                 <div className="bg-bg rounded-xl p-8 card-hover-border">
                   <div className="text-4xl mb-4">{s.icon}</div>
                   <h3 className="font-display text-2xl text-white mb-2">{s.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{s.body}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{s.body}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -124,7 +134,7 @@ export default function AboutPage() {
               <h2 className="font-display text-4xl text-white mb-4 leading-tight">
                 BESPOKE AUTOMATIONS
               </h2>
-              <p className="text-muted text-lg leading-relaxed mb-6">
+              <p className="text-white/60 text-lg leading-relaxed mb-6">
                 We also run a brother company called Bespoke Automations. They build custom AI systems
                 for businesses ready to automate the manual work slowing them down — a subsidiary of
                 Unconventional Group.
@@ -156,7 +166,7 @@ export default function AboutPage() {
                 <div className="relative">
                   <p className="font-display text-6xl text-neon/20 mb-3">{step.num}</p>
                   <h3 className="font-display text-xl text-white mb-2">{step.title}</h3>
-                  <p className="text-muted text-sm leading-relaxed">{step.body}</p>
+                  <p className="text-white/60 text-sm leading-relaxed">{step.body}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -171,14 +181,14 @@ export default function AboutPage() {
             <div className="grid md:grid-cols-2 gap-6">
               {[
                 {
-                  name: "CLIENT NAME",
-                  company: "Company Name",
-                  quote: "Add a testimonial for the About page here.",
+                  name: "Salam Abdul",
+                  company: "Google Review",
+                  quote: "It was a pleasure working with Unconventional Media in designing and developing the website for my business. Harun is a fantastic person to work with and I would definitely recommend for others to work with them!!",
                 },
                 {
-                  name: "CLIENT NAME",
-                  company: "Company Name",
-                  quote: "Add a second testimonial for the About page here.",
+                  name: "Steve",
+                  company: "Google Review",
+                  quote: "Haruun was professional, responsive and clearly knew his stuff when it came to web development. Would definitely recommend!",
                 },
               ].map((t, i) => (
                 <AnimateOnScroll key={i} delay={i * 0.1}>

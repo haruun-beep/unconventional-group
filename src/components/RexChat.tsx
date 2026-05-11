@@ -64,7 +64,7 @@ export default function RexChat() {
             {/* Messages */}
             <div className="h-72 overflow-y-auto p-4 flex flex-col gap-3">
               {messages.length === 0 && (
-                <div className="text-muted text-sm text-center mt-8">
+                <div className="text-white/50 text-sm text-center mt-8">
                   <p className="font-display text-2xl text-white mb-2">Hey, I&apos;m Rex.</p>
                   <p>Ask me anything — services, pricing, how this all works.</p>
                 </div>
@@ -109,13 +109,13 @@ export default function RexChat() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ask about pricing, services..."
-                className="flex-1 bg-bg border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-muted focus:outline-none focus:border-neon transition-colors"
+                className="flex-1 bg-bg border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-neon transition-colors"
                 disabled={isLoading}
               />
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
-                className="bg-neon text-bg px-3 py-2 rounded-lg text-sm font-semibold hover:bg-neon-dim transition-colors disabled:opacity-40"
+                className="bg-neon text-bg px-3 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-colors disabled:opacity-40"
               >
                 →
               </button>

@@ -21,9 +21,9 @@ export default function Footer() {
               <Image
                 src="/logo.jpg"
                 alt="Unconventional Group"
-                width={52}
-                height={52}
-                className="h-13 w-13 transition-all group-hover:drop-shadow-[0_0_8px_#39FF14]"
+                width={64}
+                height={64}
+                className="h-[64px] w-[64px] transition-all group-hover:drop-shadow-[0_0_10px_#39FF14] [mix-blend-mode:screen]"
               />
               <div>
                 <p className="font-display text-base tracking-[0.2em] text-white leading-none group-hover:text-neon transition-colors">

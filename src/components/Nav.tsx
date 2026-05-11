@@ -41,15 +41,15 @@ export default function Nav() {
           scrolled ? "bg-bg/95 backdrop-blur-md border-b border-neon" : "bg-transparent"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
               src="/logo.jpg"
               alt="Unconventional Group"
-              width={88}
-              height={88}
-              className="h-[88px] w-[88px] transition-all duration-300 group-hover:drop-shadow-[0_0_14px_#39FF14]"
+              width={108}
+              height={108}
+              className="h-[108px] w-[108px] transition-all duration-300 group-hover:drop-shadow-[0_0_18px_#39FF14] [mix-blend-mode:screen]"
               priority
             />
           </Link>
@@ -112,7 +112,7 @@ export default function Nav() {
           >
             {/* Mobile logo */}
             <div className="absolute top-3 left-5">
-              <Image src="/logo.jpg" alt="Unconventional Group" width={58} height={58} className="h-[58px] w-[58px]" />
+              <Image src="/logo.jpg" alt="Unconventional Group" width={72} height={72} className="h-[72px] w-[72px] [mix-blend-mode:screen]" />
             </div>
 
             <nav className="flex flex-col gap-6">

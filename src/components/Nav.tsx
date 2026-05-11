@@ -41,15 +41,15 @@ export default function Nav() {
           scrolled ? "bg-bg/95 backdrop-blur-md border-b border-neon" : "bg-transparent"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        <nav className="max-w-7xl mx-auto px-6 h-24 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center group">
             <Image
               src="/logo.jpg"
               alt="Unconventional Group"
-              width={68}
-              height={68}
-              className="h-[68px] w-[68px] transition-all duration-300 group-hover:drop-shadow-[0_0_14px_#39FF14]"
+              width={88}
+              height={88}
+              className="h-[88px] w-[88px] transition-all duration-300 group-hover:drop-shadow-[0_0_14px_#39FF14]"
               priority
             />
           </Link>

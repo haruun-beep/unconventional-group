@@ -1,10 +1,15 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+
+const growthLinks = [
+  { label: "AI Visibility", href: "/ai-visibility" },
+  { label: "SEO", href: "/growth/seo" },
+];
 
 const links = [
   { label: "Websites", href: "/websites" },
@@ -19,6 +24,8 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [growthOpen, setGrowthOpen] = useState(false);
+  const growthRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -32,7 +39,17 @@ export default function Nav() {
     return () => { document.body.style.overflow = ""; };
   }, [mobileOpen]);
 
-  useEffect(() => { setMobileOpen(false); }, [pathname]);
+  useEffect(() => { setMobileOpen(false); setGrowthOpen(false); }, [pathname]);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (growthRef.current && !growthRef.current.contains(e.target as Node)) {
+        setGrowthOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, []);
 
   return (
     <>
@@ -79,6 +96,45 @@ export default function Nav() {
                 </Link>
               )
             )}
+
+            {/* Growth dropdown */}
+            <div className="relative" ref={growthRef}>
+              <button
+                onClick={() => setGrowthOpen((v) => !v)}
+                className={`text-sm transition-colors flex items-center gap-1 ${
+                  growthLinks.some((l) => pathname === l.href) ? "text-neon" : "text-white/60 hover:text-white"
+                }`}
+              >
+                Growth
+                <svg className={`w-3 h-3 transition-transform ${growthOpen ? "rotate-180" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <AnimatePresence>
+                {growthOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -6 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -6 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute top-full left-0 mt-2 bg-surface border border-white/10 rounded-lg overflow-hidden min-w-[160px] shadow-xl"
+                  >
+                    {growthLinks.map((link) => (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className={`block px-5 py-3 text-sm transition-colors hover:bg-white/5 ${
+                          pathname === link.href ? "text-neon" : "text-white/70"
+                        }`}
+                      >
+                        {link.label}
+                      </Link>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <Link
               href="/book"
               className="bg-neon text-bg font-bold text-sm px-5 py-2 rounded hover:opacity-90 transition-colors"
@@ -148,10 +204,31 @@ export default function Nav() {
                   </motion.div>
                 )
               )}
+              {/* Growth sub-links in mobile */}
               <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: links.length * 0.07 }}
+                className="flex flex-col gap-3 pl-4 border-l border-neon/30"
+              >
+                <p className="font-display text-xs text-neon/60 tracking-widest">GROWTH</p>
+                {growthLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`font-display text-2xl transition-colors ${
+                      pathname === link.href ? "text-neon" : "text-white hover:text-neon"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: (links.length + 1) * 0.07 }}
               >
                 <Link
                   href="/book"

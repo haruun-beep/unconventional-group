@@ -37,9 +37,18 @@ export async function POST(req: Request) {
   });
 
   if (!res.ok) {
-    const error = await res.text();
-    console.error("Resend error:", error);
-    return Response.json({ error: "Failed to send. Please email us directly." }, { status: 500 });
+    const errorBody = await res.text();
+    let detail = "";
+    try {
+      const parsed = JSON.parse(errorBody) as { message?: string; name?: string };
+      detail = parsed.message ?? parsed.name ?? errorBody;
+    } catch {
+      detail = errorBody;
+    }
+    return Response.json(
+      { error: `Send failed: ${detail}. Please email us directly.` },
+      { status: 500 }
+    );
   }
 
   return Response.json({ ok: true });

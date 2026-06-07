@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   title: "Our Work — Unconventional Group",
   description:
     "Real websites built for real businesses across Canada. 50+ clients. Every site in-house.",
+  alternates: {
+    canonical: "/our-work",
+  },
 };
 
 const clients = [

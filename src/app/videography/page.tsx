@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Videography & Photography — Unconventional Group",
   description:
     "Brand films, reels, product photography and social content for Canadian businesses. Starting from $1,200/mo.",
+  alternates: {
+    canonical: "/videography",
+  },
 };
 
 const tags = [

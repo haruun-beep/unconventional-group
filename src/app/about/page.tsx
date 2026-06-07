@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "About — Unconventional Group",
   description:
     "Edmonton-based creative agency. 50+ businesses served across Canada. Websites, social media, and video.",
+  alternates: {
+    canonical: "/about",
+  },
 };
 
 const services = [

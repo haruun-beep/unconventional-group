@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Website Design & Development — Unconventional Group",
   description:
     "Custom websites, WordPress/Squarespace builds, and ecommerce stores for Canadian businesses. Starting from $750.",
+  alternates: {
+    canonical: "/websites",
+  },
 };
 
 const tiers = [

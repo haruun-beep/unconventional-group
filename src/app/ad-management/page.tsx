@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Facebook & Instagram Ad Management — Unconventional Group",
   description:
     "Facebook and Instagram ad management for Canadian businesses. We build, run, and optimize your campaigns so you get booked jobs — not just impressions.",
+  alternates: {
+    canonical: "/ad-management",
+  },
 };
 
 const whatWeHandle = [

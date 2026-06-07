@@ -1,4 +1,14 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Unconventional Group — Edmonton Creative Agency",
+  description:
+    "Edmonton-based creative agency serving businesses across Canada. Custom websites from $750, social media management, video production, and ad management.",
+  alternates: {
+    canonical: "/",
+  },
+};
 import HeroSlider from "@/components/HeroSlider";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import TestimonialCard from "@/components/TestimonialCard";

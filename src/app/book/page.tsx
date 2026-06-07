@@ -5,6 +5,9 @@ export const metadata: Metadata = {
   title: "Book a Free Call — Unconventional Group",
   description:
     "Free 20-minute call. No pitch. We look at your business and tell you exactly what we'd do.",
+  alternates: {
+    canonical: "/book",
+  },
 };
 
 export default function BookPage() {

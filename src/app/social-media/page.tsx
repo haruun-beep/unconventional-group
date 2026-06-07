@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "Social Media Management — Unconventional Group",
   description:
     "Done-for-you social media management for Canadian businesses. Instagram, Facebook, LinkedIn. Starting from $1,500/mo.",
+  alternates: {
+    canonical: "/social-media",
+  },
 };
 
 const whatWeHandle = [

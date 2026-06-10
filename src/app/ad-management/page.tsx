@@ -58,8 +58,8 @@ const faqs = [
     a: "Less than you'd think. One of our clients booked 5 additional jobs in a single week on just $70 of ad spend. You control the budget, you own the ad accounts, and we make every dollar work — cutting what underperforms and scaling what's working, daily.",
   },
   {
-    q: "What's included in ad management, and what does it cost?",
-    a: "Management is a flat $500/month — most agencies charge $1,500–$3,000 for the same scope. That covers everything end-to-end: strategy and campaign setup, ad copy and graphics, audience targeting, daily optimization, and a plain-English monthly report. Ad spend is separate and you control it. You approve everything before it goes live.",
+    q: "What's included in ad management?",
+    a: "Everything end-to-end: strategy and campaign setup, ad copy and graphics, audience targeting, daily optimization, and a plain-English monthly report on what we spent, what it returned, and what we're changing. You approve everything before it goes live.",
   },
   {
     q: "Do I own my ad accounts and data?",

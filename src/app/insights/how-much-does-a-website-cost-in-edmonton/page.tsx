@@ -29,7 +29,7 @@ const articleJsonLd = {
 const faqItems = [
   {
     q: "What's a realistic budget for a small business website in Edmonton?",
-    a: "For a professionally built 5–8 page site with custom copy, most Edmonton businesses land somewhere in the freelancer-to-small-team range — typically $1,000 to $5,000 in the broader market. E-commerce, custom integrations, and large page counts push it higher. For reference, our own pricing is public: template builds from $750, fully custom sites from $1,500, and online stores from $2,000 — with the exact quote scoped on a free call.",
+    a: "For a professionally built 5–8 page site with custom copy, most Edmonton businesses land somewhere in the freelancer-to-small-team range — typically $1,000 to $5,000 in the broader market. E-commerce, custom integrations, and large page counts push it higher. The honest answer is that it depends on what the site needs to do, which is why we scope every project on a free call instead of quoting blind.",
   },
   {
     q: "Why are some websites only a few hundred dollars?",

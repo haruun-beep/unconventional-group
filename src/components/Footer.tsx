@@ -29,7 +29,6 @@ const companyLinks = [
   { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
   { label: "Subsidiaries", href: "/subsidiaries" },
-  { label: "Calgary", href: "/locations/calgary" },
   { label: "Book a Call", href: "/book" },
 ];
 

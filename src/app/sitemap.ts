@@ -28,7 +28,6 @@ const routes: Route[] = [
   { path: "/industries/home-services", priority: 0.8, freq: "monthly" },
   { path: "/industries/restaurants", priority: 0.8, freq: "monthly" },
   { path: "/industries/real-estate", priority: 0.8, freq: "monthly" },
-  { path: "/locations/calgary", priority: 0.8, freq: "monthly" },
   { path: "/results", priority: 0.8, freq: "monthly" },
   { path: "/insights", priority: 0.7, freq: "weekly" },
   { path: "/insights/how-much-does-a-website-cost-in-edmonton", priority: 0.7, freq: "yearly" },

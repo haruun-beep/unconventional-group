@@ -3,12 +3,22 @@ import Link from "next/link";
 import AnimateOnScroll from "@/components/AnimateOnScroll";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
+import PageHero from "@/components/PageHero";
+import ServiceSchema from "@/components/ServiceSchema";
+import FAQ from "@/components/FAQ";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ad-management" },
   title: "Facebook & Instagram Ad Management — Unconventional Group",
   description:
     "Facebook and Instagram ad management for Canadian businesses. We build, run, and optimize your campaigns so you get booked jobs — not just impressions.",
 };
+
+const HERO_BG =
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80";
+
+const PROCESS_BG =
+  "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1920&q=80";
 
 const whatWeHandle = [
   {
@@ -42,26 +52,46 @@ const platforms = [
   "Local Awareness Ads",
 ];
 
+const faqs = [
+  {
+    q: "What ad budget do I need to get results?",
+    a: "Less than you'd think. One of our clients booked 5 additional jobs in a single week on just $70 of ad spend. You control the budget, you own the ad accounts, and we make every dollar work — cutting what underperforms and scaling what's working, daily.",
+  },
+  {
+    q: "What's included in ad management?",
+    a: "Everything end-to-end: strategy and campaign setup, ad copy and graphics, audience targeting, daily optimization, and a plain-English monthly report on what we spent, what it returned, and what we're changing. You approve everything before it goes live.",
+  },
+  {
+    q: "Do I own my ad accounts and data?",
+    a: "Yes — always. The ad accounts, the audiences, the data, all of it stays yours. It's month-to-month with no lock-in, so if you ever leave, you keep everything we built.",
+  },
+  {
+    q: "How fast will I see results from Facebook and Instagram ads?",
+    a: "Lead campaigns can start producing within the first week or two — one client booked 5 jobs in their first week. That said, the first month is also about learning what your market responds to, so results compound as we optimize.",
+  },
+  {
+    q: "How are you different from a typical ads agency?",
+    a: "We're a team, not an agency. No dashboard you don't understand, no jargon, no lock-in contracts. We watch your campaigns daily, report in plain English, and you talk directly to the people running your ads. 50+ businesses served across Canada from our Edmonton base.",
+  },
+];
+
 export default function AdManagementPage() {
   return (
     <>
-      {/* Hero */}
-      <section className="bg-bg pt-32 pb-24 px-6 grid-bg">
-        <div className="max-w-4xl mx-auto text-center">
-          <AnimateOnScroll>
-            <p className="font-display text-sm text-neon tracking-widest mb-4">AD MANAGEMENT</p>
-            <h1 className="font-display text-6xl md:text-8xl text-white leading-tight mb-6">
-              ADS THAT BOOK JOBS. NOT JUST LIKES.
-            </h1>
-            <p className="text-white/70 text-xl max-w-2xl mx-auto">
-              We manage your Facebook and Instagram campaigns end-to-end. Strategy, creative,
-              targeting, optimization, reporting. You handle the work. We fill your pipeline.
-            </p>
-          </AnimateOnScroll>
-        </div>
-      </section>
+      <ServiceSchema
+        name="Facebook & Instagram Ad Management"
+        description="Facebook and Instagram ad management for Canadian businesses. We build, run, and optimize your campaigns so you get booked jobs — not just impressions."
+        path="/ad-management"
+      />
+      <PageHero
+        badge="AD MANAGEMENT"
+        headline="ADS THAT BOOK JOBS. NOT JUST LIKES."
+        subhead="We manage your Facebook and Instagram campaigns end-to-end. Strategy, creative, targeting, optimization, reporting. You handle the work. We fill your pipeline."
+        bgUrl={HERO_BG}
+        cta={{ label: "Get Started", href: "/book" }}
+      />
 
-      {/* What we run */}
+      {/* Platform tags */}
       <section className="bg-surface py-16 px-6">
         <div className="max-w-4xl mx-auto">
           <AnimateOnScroll>
@@ -69,7 +99,7 @@ export default function AdManagementPage() {
               {platforms.map((p) => (
                 <span
                   key={p}
-                  className="border border-neon text-neon font-display text-sm tracking-widest px-5 py-2.5 rounded-full"
+                  className="border border-neon/40 text-neon font-display text-sm tracking-[0.2em] px-5 py-2.5 rounded-full hover:bg-neon/8 transition-colors cursor-default"
                 >
                   {p}
                 </span>
@@ -79,29 +109,39 @@ export default function AdManagementPage() {
         </div>
       </section>
 
-      {/* Process — full breakdown */}
+      {/* Process — photo bg */}
       <section
-        className="bg-neon py-44 px-6"
-        style={{ clipPath: "polygon(0 6%, 100% 0%, 100% 94%, 0% 100%)" }}
+        className="relative py-28 px-6 overflow-hidden"
+        style={{
+          backgroundImage: `url('${PROCESS_BG}')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        <div className="max-w-4xl mx-auto">
+        <div className="absolute inset-0 bg-black/88" />
+        <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon/35 to-transparent" />
+
+        <div className="relative z-10 max-w-5xl mx-auto">
           <AnimateOnScroll>
-            <h2 className="font-display text-4xl md:text-5xl text-bg text-center mb-4">
+            <p className="font-display text-xs text-neon tracking-[0.35em] text-center mb-3">
+              THE PROCESS
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl text-white text-center mb-4 leading-[0.93]">
               HERE&apos;S EXACTLY HOW WE DO IT.
             </h2>
-            <p className="text-bg/60 text-center mb-14 max-w-xl mx-auto">
+            <p className="text-white/35 text-center text-sm mb-14 max-w-lg mx-auto">
               Most ad managers take your money and send you a dashboard you don&apos;t understand.
               We do it differently.
             </p>
           </AnimateOnScroll>
 
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-5">
             {whatWeHandle.map((step, i) => (
               <AnimateOnScroll key={step.num} delay={i * 0.1}>
-                <div className="bg-bg rounded-xl p-8 h-full">
-                  <p className="font-display text-5xl text-neon/25 mb-3">{step.num}</p>
-                  <h3 className="font-display text-2xl text-white mb-3">{step.title}</h3>
-                  <p className="text-white/60 text-sm leading-relaxed">{step.body}</p>
+                <div className="bg-white/5 border border-white/8 rounded-xl p-8 h-full hover:border-neon/25 transition-colors">
+                  <p className="font-display text-5xl text-neon/20 mb-3">{step.num}</p>
+                  <h3 className="font-display text-2xl text-white mb-3 leading-snug">{step.title}</h3>
+                  <p className="text-white/55 text-sm leading-relaxed">{step.body}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -113,11 +153,11 @@ export default function AdManagementPage() {
       <section className="bg-bg py-24 px-6">
         <div className="max-w-3xl mx-auto">
           <AnimateOnScroll>
-            <h2 className="font-display text-4xl md:text-5xl text-white mb-10 text-center">
+            <h2 className="font-display text-4xl md:text-5xl text-white mb-10 text-center leading-[0.93]">
               WHY MOST ADS FAIL.
             </h2>
           </AnimateOnScroll>
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-3 gap-5">
             {[
               {
                 problem: "Wrong audience",
@@ -133,11 +173,11 @@ export default function AdManagementPage() {
               },
             ].map((item, i) => (
               <AnimateOnScroll key={i} delay={i * 0.1}>
-                <div className="bg-surface border border-white/10 rounded-xl p-6 card-hover-border">
-                  <p className="text-white/30 text-xs font-display tracking-widest mb-2">THE PROBLEM</p>
+                <div className="bg-surface border border-white/8 rounded-xl p-6 card-hover-border h-full">
+                  <p className="text-white/25 text-xs font-display tracking-widest mb-2">THE PROBLEM</p>
                   <p className="font-display text-xl text-neon mb-4">{item.problem}</p>
-                  <p className="text-white/30 text-xs font-display tracking-widest mb-2">OUR FIX</p>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.fix}</p>
+                  <p className="text-white/25 text-xs font-display tracking-widest mb-2">OUR FIX</p>
+                  <p className="text-white/65 text-sm leading-relaxed">{item.fix}</p>
                 </div>
               </AnimateOnScroll>
             ))}
@@ -149,24 +189,24 @@ export default function AdManagementPage() {
       <section className="bg-surface py-24 px-6">
         <div className="max-w-3xl mx-auto text-center">
           <AnimateOnScroll>
-            <h2 className="font-display text-4xl md:text-5xl text-white mb-10">
+            <h2 className="font-display text-4xl md:text-5xl text-white mb-10 leading-[0.93]">
               SIMPLE PRICING. NO SURPRISES.
             </h2>
-            <div className="bg-bg border border-white/10 rounded-2xl p-10">
+            <div className="bg-bg border border-white/8 rounded-2xl p-10">
               <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
                 <div className="text-center">
-                  <p className="text-white/50 text-sm mb-2">Typical freelance ads manager</p>
-                  <p className="font-display text-4xl text-white/30 line-through">$1,500–$3,000/mo</p>
-                  <p className="text-white/40 text-xs mt-1">for management alone</p>
+                  <p className="text-white/45 text-sm mb-2">Typical freelance ads manager</p>
+                  <p className="font-display text-4xl text-white/25 line-through">$1,500–$3,000/mo</p>
+                  <p className="text-white/35 text-xs mt-1">for management alone</p>
                 </div>
-                <div className="text-3xl text-white/30 font-display">VS</div>
+                <div className="text-3xl text-white/25 font-display">VS</div>
                 <div className="text-center">
-                  <p className="text-white/50 text-sm mb-2">Our management fee</p>
+                  <p className="text-white/45 text-sm mb-2">Our management fee</p>
                   <p className="font-display text-5xl text-neon glow">$500/mo</p>
-                  <p className="text-white/40 text-xs mt-1">+ your ad spend (you control the budget)</p>
+                  <p className="text-white/35 text-xs mt-1">+ your ad spend (you control the budget)</p>
                 </div>
               </div>
-              <p className="text-white/50 text-sm">
+              <p className="text-white/40 text-sm">
                 Month-to-month. No lock-in. You own all your ad accounts. Cancel anytime.
               </p>
             </div>
@@ -192,11 +232,11 @@ export default function AdManagementPage() {
         <div className="max-w-2xl mx-auto text-center">
           <AnimateOnScroll>
             <p className="font-display text-6xl text-neon glow mb-2">$500/mo</p>
-            <p className="text-white/50 mb-2">+ your ad spend</p>
-            <p className="text-white/30 text-sm mb-8">Month-to-month. No lock-in. Cancel anytime.</p>
+            <p className="text-white/40 text-sm mb-1">+ your ad spend</p>
+            <p className="text-white/25 text-xs mb-8">Month-to-month. No lock-in. Cancel anytime.</p>
             <Link
               href="/book"
-              className="inline-block bg-neon text-bg font-bold px-10 py-4 rounded text-base hover:opacity-90 transition-opacity"
+              className="inline-block bg-neon text-bg font-bold px-10 py-4 rounded text-sm tracking-wide hover:opacity-90 transition-opacity"
             >
               Book a Free Call
             </Link>
@@ -204,7 +244,9 @@ export default function AdManagementPage() {
         </div>
       </section>
 
-      <CTASection headline="READY TO FILL YOUR PIPELINE WITH PAID ADS?" />
+      <FAQ items={faqs} heading="AD MANAGEMENT QUESTIONS." />
+
+      <CTASection bgUrl="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80" headline="READY TO FILL YOUR PIPELINE WITH PAID ADS?" />
     </>
   );
 }

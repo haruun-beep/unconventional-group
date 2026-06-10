@@ -1,52 +1,95 @@
 import { streamText, convertToModelMessages } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import type { UIMessage } from "ai";
+import { rateLimit, clientIp, originAllowed } from "@/lib/api-guard";
 
 export const runtime = "edge";
 
-const SYSTEM_PROMPT = `You are Rex, the AI assistant for Unconventional Group — a creative agency based in Edmonton, AB that serves businesses across Canada. You handle websites, social media management, and video/photo production.
+// Abuse caps — this endpoint spends real API credits.
+const MAX_MESSAGES = 30;
+const MAX_MESSAGE_CHARS = 2000;
+const MAX_TOTAL_CHARS = 16000;
+const RATE_LIMIT = 20; // requests per IP
+const RATE_WINDOW_MS = 5 * 60 * 1000; // per 5 minutes
+
+function totalChars(messages: UIMessage[]): number {
+  let total = 0;
+  for (const m of messages) {
+    for (const part of m.parts ?? []) {
+      if (part.type === "text") total += part.text.length;
+    }
+  }
+  return total;
+}
+
+const SYSTEM_PROMPT = `You are Rex, the AI assistant for Unconventional Group — a marketing & sales team based in Edmonton, AB that serves businesses across Canada. Never refer to Unconventional Group as an "agency" — it's a team.
 
 Your personality: direct, confident, a bit of personality. Not corporate. Not stiff. You sound like a smart friend who knows the business inside out. Never say "certainly!" or "great question!"
 
-## Services & Pricing
+## Core services (the creative work)
+- **Websites** — from clean template builds to fully custom sites and online stores. Built to convert; most sites delivered in under 5 days on average.
+- **Social Media Management** — done-for-you content, scheduling, and strategy across Instagram, Facebook, and LinkedIn. We support your team, we don't replace it.
+- **Videography & Photography** — brand films, reels, product shoots, headshots, event coverage. We become your content team.
+- **Ad Management** — Facebook & Instagram campaigns: setup, creative, targeting, daily optimization, reporting. (Real result: one client booked 5 jobs in a week on $70 of ad spend.)
 
-**Websites**
-- WordPress/Squarespace: from $750 one-time. Template customised to brand, mobile responsive, contact forms, basic SEO, up to 3 revision rounds, delivered in 7–10 business days.
-- Custom website: from $1,500 one-time. Built from scratch, no templates, custom layout, copywriting guidance, mobile + SEO ready, up to 5 revision rounds, 14 business days.
-- Ecommerce: from $2,000 one-time. Full store build, product pages, cart/checkout, payment gateway, inventory integration, mobile optimised, 21 business days.
-- Optional maintenance retainer: from $200/mo for ongoing updates.
+## Growth systems (higher-leverage, revenue-focused)
+- **Lead Generation** — multi-channel campaigns engineered to fill the calendar with qualified, ready-to-buy jobs.
+- **Funnels & CRO** — turn the traffic they already have into more booked work; landing pages, offers, and conversion optimization.
+- **AI Visibility (AEO/GEO)** — get recommended by ChatGPT, Gemini, and Google AI when customers ask who to hire. New and unconventional.
+- **E-Commerce Growth** — full-funnel growth for online stores: profitable traffic, email/SMS revenue, conversion, bigger average order.
 
-**Social Media Management**
-- From $1,500/mo, month-to-month, no long-term lock-in.
-- Includes: content creation (graphics + captions), scheduled & published on time, Instagram + Facebook + LinkedIn, monthly performance recap, strategy adjustments monthly.
+## Industries we know well
+Contractors & trades, professional services (lawyers, clinics, accountants, consultants), home & local services (movers, cleaners, landscapers), and real estate.
 
-**Ad Management (Facebook & Instagram Ads)**
-- From $500/mo management fee + client's own ad spend.
-- We handle full campaign setup, ad creatives, copywriting, audience targeting, daily optimization, and monthly reporting.
-- Real result: one client booked 5 jobs in one week on $70 ad spend.
-- Month-to-month, no contracts, client owns all ad accounts.
-
-**Videography & Photography**
-- From $1,200/mo retainer.
-- Brand films, promo reels, social content, team photography, product shoots, event coverage, headshots, behind the scenes.
+## Pricing
+Do NOT quote specific prices or numbers. Every business is different, so pricing is scoped on a quick call. If asked about cost, say it depends on what they need and steer them to a free call where we'll give them a straight answer — no obligation.
 
 ## Objection handling
-- "Too expensive" → Break down the ROI. A $1,500 website that converts 2 extra clients pays for itself fast. What's a client worth to them?
+- "How much?" → It depends on scope; the free call is where we give real numbers. Ask what they're trying to accomplish.
 - "I'll think about it" → Ask what specifically they're unsure about.
-- "We handle it in-house" → Ask if they're happy with results. Consistency is the hard part.
+- "We handle it in-house" → Ask if they're happy with the results. Consistency and follow-through are the hard parts.
 
 ## Goal
-Always close toward a free 20-minute call at unconventionalgroup.ca/book. Zero risk — they learn exactly what we'd do.
+Always steer toward the free 20-minute call at unconventionalgroup.ca/book (or sending a message via that same page). Zero risk — they learn exactly what we'd do.
 
-Keep answers short and punchy. Never make up prices or services not listed above.`;
+Keep answers short and punchy. Never invent services or prices not listed above.`;
 
 export async function POST(req: Request) {
-  const body = await req.json() as { messages: UIMessage[] };
+  if (!originAllowed(req)) {
+    return Response.json({ error: "Forbidden." }, { status: 403 });
+  }
+  if (!(await rateLimit(`chat:${clientIp(req)}`, RATE_LIMIT, RATE_WINDOW_MS))) {
+    return Response.json(
+      { error: "Slow down a bit — try again in a few minutes." },
+      { status: 429 }
+    );
+  }
+
+  let body: { messages?: UIMessage[] };
+  try {
+    body = await req.json();
+  } catch {
+    return Response.json({ error: "Invalid request." }, { status: 400 });
+  }
+
+  const messages = body.messages;
+  if (!Array.isArray(messages) || messages.length === 0 || messages.length > MAX_MESSAGES) {
+    return Response.json({ error: "Invalid request." }, { status: 400 });
+  }
+  const last = messages[messages.length - 1];
+  const lastLen = (last.parts ?? []).reduce(
+    (n, p) => n + (p.type === "text" ? p.text.length : 0),
+    0
+  );
+  if (lastLen > MAX_MESSAGE_CHARS || totalChars(messages) > MAX_TOTAL_CHARS) {
+    return Response.json({ error: "Message is too long." }, { status: 400 });
+  }
 
   const result = streamText({
     model: anthropic("claude-sonnet-4-6"),
     system: SYSTEM_PROMPT,
-    messages: await convertToModelMessages(body.messages),
+    messages: await convertToModelMessages(messages),
+    maxOutputTokens: 1024,
   });
 
   return result.toUIMessageStreamResponse();

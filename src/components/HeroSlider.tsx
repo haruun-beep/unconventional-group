@@ -1,177 +1,132 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 
-const slides = [
-  {
-    badge: "CUSTOM WEBSITES",
-    headline: "STOP LOOKING LIKE YOUR COMPETITOR BUILT YOUR WEBSITE.",
-    subhead: "Your website is the first thing a potential client judges you on. We make sure that judgement works in your favour every single time.",
-    cta: { label: "See Website Work", href: "/websites" },
-    accent: "#39FF14",
-  },
-  {
-    badge: "SOCIAL MEDIA MANAGEMENT",
-    headline: "YOUR LAST POST WAS SIX WEEKS AGO. YOUR COMPETITOR'S WAS THIS MORNING.",
-    subhead: "Consistency is what wins on social. Not talent, not budget — consistency. We handle it every month so you never fall off.",
-    cta: { label: "See Social Work", href: "/social-media" },
-    accent: "#39FF14",
-  },
-  {
-    badge: "VIDEO AND PHOTO",
-    headline: "YOUR PHONE CAMERA ISN'T A BRAND STRATEGY.",
-    subhead: "We shoot and edit brand content that makes your business look like it belongs at the top — because it does.",
-    cta: { label: "See Video Work", href: "/videography" },
-    accent: "#39FF14",
-  },
-];
-
-function WordByWord({ text, active }: { text: string; active: boolean }) {
-  const words = text.split(" ");
-  return (
-    <span>
-      {words.map((word, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 24 }}
-          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ delay: 0.2 + i * 0.055, duration: 0.4, ease: "easeOut" }}
-          className="inline-block mr-[0.22em]"
-        >
-          {word}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
+const HERO_BG = "/edmonton-hero.jpg";
 
 export default function HeroSlider() {
-  const [current, setCurrent] = useState(0);
-  const [animKey, setAnimKey] = useState(0);
-
-  const goTo = useCallback((index: number) => {
-    setCurrent(index);
-    setAnimKey((k) => k + 1);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrent((c) => {
-        const next = (c + 1) % slides.length;
-        setAnimKey((k) => k + 1);
-        return next;
-      });
-    }, 5500);
-    return () => clearInterval(timer);
-  }, []);
-
-  const slide = slides[current];
-
   return (
-    <section className="relative h-screen min-h-[640px] flex items-center justify-center overflow-hidden bg-bg">
-
-      {/* Grid background */}
-      <div className="absolute inset-0 grid-bg opacity-60" />
-
-      {/* Radial glow from center */}
+    <section
+      className="relative min-h-screen flex items-center overflow-hidden"
+      style={{
+        backgroundImage: `url('${HERO_BG}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center 55%",
+      }}
+    >
+      {/* Dark base overlay */}
+      <div className="absolute inset-0 bg-black/62" />
+      {/* Left-side gradient for text legibility */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/55 via-black/15 to-transparent" />
+      {/* Bottom fade into site bg */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-bg to-transparent" />
+      {/* Subtle neon tint top-right */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 70% 60% at 50% 55%, rgba(57,255,20,0.06) 0%, transparent 70%)",
+          background:
+            "radial-gradient(ellipse 55% 45% at 80% 15%, rgba(57,255,20,0.06) 0%, transparent 65%)",
         }}
       />
 
-      {/* Large faded slide number / decorative text */}
-      <AnimatePresence mode="wait">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 w-full pt-44 md:pt-56 pb-28">
+        {/* Badge */}
         <motion.div
-          key={`bg-${current}`}
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="inline-flex items-center gap-2 border border-neon/50 text-neon font-display text-xs tracking-[0.25em] px-4 py-2 rounded mb-8"
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse" />
+          EDMONTON&apos;S GROWTH TEAM
+        </motion.div>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, x: -70 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+          className="font-display text-[clamp(3.2rem,9vw,7.5rem)] text-white leading-[0.9] tracking-tight max-w-4xl mb-5"
+        >
+          WE BUILD BRANDS THAT WIN ONLINE.
+        </motion.h1>
+
+        {/* Neon underline */}
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1], delay: 0.78 }}
+          className="w-20 h-[3px] bg-neon mb-8 origin-left"
+        />
+
+        {/* Subhead */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.4 }}
+          className="text-white/68 text-lg md:text-xl max-w-xl mb-11 leading-relaxed"
+        >
+          Websites, social media, videography & ad management — all in-house.
+          50+ businesses across Canada trust us to grow their brand.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.65 }}
+          className="flex flex-col sm:flex-row gap-4"
+        >
+          <Link
+            href="/book"
+            className="inline-block bg-neon text-bg font-bold px-9 py-4 rounded text-sm tracking-wider hover:opacity-90 transition-opacity"
+          >
+            Book a Free Call
+          </Link>
+          <Link
+            href="/our-work"
+            className="inline-block border border-white/25 text-white px-9 py-4 rounded text-sm tracking-wider hover:border-neon hover:text-neon transition-all duration-200"
+          >
+            See Our Work →
+          </Link>
+        </motion.div>
+
+        {/* Stats row */}
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8 }}
-          className="absolute right-0 bottom-16 font-display text-[22vw] leading-none text-neon/[0.03] select-none pointer-events-none pr-6"
+          transition={{ delay: 1.2, duration: 0.7 }}
+          className="flex flex-wrap gap-x-12 gap-y-5 mt-16 pt-8 border-t border-white/10"
         >
-          {String(current + 1).padStart(2, "0")}
+          {[
+            { value: "50+", label: "Businesses Served" },
+            { value: "4", label: "Services, One Team" },
+            { value: "Under 5 Days", label: "Avg. Site Delivery" },
+            { value: "Canada-Wide", label: "Reach" },
+          ].map((s) => (
+            <div key={s.value}>
+              <p className="font-display text-3xl md:text-4xl text-neon glow">{s.value}</p>
+              <p className="text-white/40 text-xs mt-0.5 tracking-wide">{s.label}</p>
+            </div>
+          ))}
         </motion.div>
-      </AnimatePresence>
-
-      {/* Neon bottom line */}
-      <div className="absolute bottom-0 left-0 right-0 h-px bg-neon/20" />
-
-      {/* Slide content */}
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={current}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="relative z-10 max-w-5xl mx-auto px-6 text-center"
-        >
-          {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="inline-flex items-center gap-2 border border-neon/60 text-neon font-display text-xs tracking-[0.25em] px-4 py-1.5 rounded mb-8"
-          >
-            <span className="w-1.5 h-1.5 rounded-full bg-neon animate-pulse" />
-            {slide.badge}
-          </motion.div>
-
-          {/* Headline */}
-          <h1 className="font-display text-5xl md:text-7xl lg:text-[82px] text-white leading-[1.05] mb-7 tracking-tight">
-            <WordByWord text={slide.headline} active={true} key={animKey} />
-          </h1>
-
-          {/* Subhead */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.95 }}
-            className="text-white/60 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed"
-          >
-            {slide.subhead}
-          </motion.p>
-
-          {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.15 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
-          >
-            <Link
-              href={slide.cta.href}
-              className="bg-neon text-bg font-bold px-8 py-4 rounded hover:opacity-90 transition-colors text-sm tracking-wide"
-            >
-              {slide.cta.label}
-            </Link>
-            <Link
-              href="/book"
-              className="border border-white/20 text-white px-8 py-4 rounded hover:border-neon hover:text-neon transition-colors text-sm tracking-wide"
-            >
-              Book a Free Call
-            </Link>
-          </motion.div>
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Dot nav */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-3 z-20">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => goTo(i)}
-            className={`h-1.5 rounded-full transition-all duration-400 ${
-              i === current ? "bg-neon w-8" : "bg-white/25 w-1.5 hover:bg-white/50"
-            }`}
-            aria-label={`Go to slide ${i + 1}`}
-          />
-        ))}
       </div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.7, duration: 0.5 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-10"
+      >
+        <span className="text-white/25 text-[10px] font-display tracking-[0.3em]">SCROLL</span>
+        <motion.div
+          animate={{ y: [0, 8, 0] }}
+          transition={{ repeat: Infinity, duration: 1.7, ease: "easeInOut" }}
+          className="w-px h-8 bg-gradient-to-b from-neon/50 to-transparent"
+        />
+      </motion.div>
     </section>
   );
 }

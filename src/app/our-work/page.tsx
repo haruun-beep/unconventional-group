@@ -4,12 +4,25 @@ import AnimateOnScroll from "@/components/AnimateOnScroll";
 import CTASection from "@/components/CTASection";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/our-work" },
   title: "Our Work — Unconventional Group",
   description:
     "Real websites built for real businesses across Canada. 50+ clients. Every site in-house.",
 };
 
 const clients = [
+  {
+    name: "25/7 Construction",
+    url: "https://257construction.com",
+    display: "257construction.com",
+    industry: "Construction",
+  },
+  {
+    name: "Compass Place",
+    url: "https://compassplace.ca",
+    display: "compassplace.ca",
+    industry: "Real Estate",
+  },
   {
     name: "Zebra Demolition",
     url: "https://zebrademolition.ca",
@@ -41,12 +54,6 @@ const clients = [
     industry: "Home Builder",
   },
   {
-    name: "Finesse Builders",
-    url: "https://www.finessebuildersandgeneralcontractorsinc.ca",
-    display: "finessebuildersandgeneralcontractorsinc.ca",
-    industry: "General Contractor",
-  },
-  {
     name: "Canes Contracting",
     url: "https://www.canescontracting.ca",
     display: "canescontracting.ca",
@@ -76,29 +83,17 @@ const clients = [
     display: "kabrightcleanco.ca",
     industry: "Cleaning Services",
   },
-  {
-    name: "DS Drywall Service",
-    url: "https://www.dsdrywallservice.ca",
-    display: "dsdrywallservice.ca",
-    industry: "Drywall",
-  },
-  {
-    name: "Northwest Electric",
-    url: "https://www.northwestelectricltd.ca",
-    display: "northwestelectricltd.ca",
-    industry: "Electrical",
-  },
 ];
 
 function screenshotUrl(url: string) {
-  return `https://image.thum.io/get/width/1280/noanimate/${url}`;
+  return `https://s.wordpress.com/mshots/v1/${encodeURIComponent(url)}?w=1280&h=800`;
 }
 
 export default function OurWorkPage() {
   return (
     <>
       {/* Hero */}
-      <section className="bg-bg pt-32 pb-24 px-6 grid-bg">
+      <section className="bg-bg pt-44 md:pt-56 pb-24 px-6 grid-bg">
         <div className="max-w-5xl mx-auto text-center">
           <AnimateOnScroll>
             <p className="font-display text-sm text-neon tracking-widest mb-4">PORTFOLIO</p>
@@ -124,7 +119,8 @@ export default function OurWorkPage() {
               SPEAKS.
             </h1>
             <p className="text-white/50 text-xl max-w-xl mx-auto mt-6">
-              {clients.length} live websites. Real businesses. Every one built in-house.
+              Just some of the live sites we&apos;ve built — real businesses, every one in-house.
+              And these are only a sample; there&apos;s plenty more where these came from.
             </p>
           </AnimateOnScroll>
         </div>
@@ -201,7 +197,7 @@ export default function OurWorkPage() {
         </div>
       </section>
 
-      <CTASection headline="LIKE WHAT YOU SEE? LET'S BUILD YOURS." />
+      <CTASection bgUrl="https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=1920&q=80" headline="LIKE WHAT YOU SEE? LET'S BUILD YOURS." />
     </>
   );
 }

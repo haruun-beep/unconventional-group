@@ -6,19 +6,59 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
-const links = [
+const services = [
   { label: "Websites", href: "/websites" },
   { label: "Social Media", href: "/social-media" },
   { label: "Videography", href: "/videography" },
   { label: "Ad Management", href: "/ad-management" },
-  { label: "Our Work", href: "/our-work" },
-  { label: "About", href: "/about" },
-  { label: "Bespoke Automations", href: "https://bespokeautomations.ca", external: true },
 ];
+
+const growth = [
+  { label: "Lead Generation", href: "/lead-generation" },
+  { label: "Funnels & CRO", href: "/funnels-cro" },
+  { label: "AI Visibility", href: "/ai-visibility" },
+  { label: "E-Commerce Growth", href: "/ecommerce" },
+];
+
+const industries = [
+  { label: "Contractors & Trades", href: "/industries/contractors" },
+  { label: "Professional Services", href: "/industries/professional-services" },
+  { label: "Home & Local Services", href: "/industries/home-services" },
+  { label: "Restaurants", href: "/industries/restaurants" },
+  { label: "Real Estate", href: "/industries/real-estate" },
+];
+
+const dropdowns = [
+  { key: "services", label: "Services", items: services },
+  { key: "growth", label: "Growth", items: growth },
+  { key: "industries", label: "Industries", items: industries },
+];
+
+const mainLinks = [
+  { label: "Past Work", href: "/our-work" },
+  { label: "About", href: "/about" },
+];
+
+function Logo({ size = "default" }: { size?: "default" | "small" }) {
+  const dim = size === "small" ? "h-14 w-14" : "h-[100px] w-[100px] md:h-48 md:w-48";
+  return (
+    <Link href="/" className="group flex items-center shrink-0">
+      <Image
+        src="/logo.png"
+        alt="Unconventional Group"
+        width={320}
+        height={320}
+        priority
+        className={`${dim} transition-transform duration-300 group-hover:scale-105`}
+      />
+    </Link>
+  );
+}
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState<string | null>(null);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -38,50 +78,79 @@ export default function Nav() {
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled ? "bg-bg/95 backdrop-blur-md border-b border-neon" : "bg-transparent"
+          scrolled ? "bg-bg/95 backdrop-blur-md border-b border-neon/40" : "bg-transparent"
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center group">
-            <Image
-              src="/logo.jpg"
-              alt="Unconventional Group"
-              width={108}
-              height={108}
-              className="h-[108px] w-[108px] transition-all duration-300 group-hover:drop-shadow-[0_0_18px_#39FF14] [mix-blend-mode:screen]"
-              priority
-            />
-          </Link>
+        <nav className="max-w-7xl mx-auto px-6 h-28 md:h-48 flex items-center justify-between">
+          <Logo />
 
           {/* Desktop links */}
-          <div className="hidden lg:flex items-center gap-6">
-            {links.map((link) =>
-              link.external ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-white/60 hover:text-neon transition-colors"
+          <div className="hidden xl:flex items-center gap-7">
+            {dropdowns.map((dd) => {
+              const active = dd.items.some((it) => it.href === pathname);
+              const isOpen = openMenu === dd.key;
+              return (
+                <div
+                  key={dd.key}
+                  className="relative"
+                  onMouseEnter={() => setOpenMenu(dd.key)}
+                  onMouseLeave={() => setOpenMenu(null)}
                 >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={`text-sm transition-colors ${
-                    pathname === link.href ? "text-neon" : "text-white/60 hover:text-white"
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            )}
+                  <button
+                    className={`flex items-center gap-1.5 text-sm transition-colors ${
+                      active ? "text-neon" : "text-white/65 hover:text-white"
+                    }`}
+                  >
+                    {dd.label}
+                    <span className={`text-[10px] transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}>▼</span>
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 8 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: 8 }}
+                        transition={{ duration: 0.18 }}
+                        className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
+                      >
+                        <div className="bg-surface border border-white/10 rounded-xl p-2 w-60 shadow-2xl shadow-black/50">
+                          {dd.items.map((it) => (
+                            <Link
+                              key={it.href}
+                              href={it.href}
+                              className={`block px-4 py-2.5 rounded-lg text-sm transition-colors ${
+                                pathname === it.href
+                                  ? "bg-neon/10 text-neon"
+                                  : "text-white/65 hover:bg-white/5 hover:text-white"
+                              }`}
+                            >
+                              {it.label}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
+
+            {mainLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={`text-sm transition-colors ${
+                  pathname === link.href ? "text-neon" : "text-white/65 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
+
             <Link
               href="/book"
-              className="bg-neon text-bg font-bold text-sm px-5 py-2 rounded hover:opacity-90 transition-colors"
+              className="bg-neon text-bg font-bold text-sm px-5 py-2.5 rounded hover:opacity-90 transition-opacity"
             >
               Book a Call
             </Link>
@@ -89,7 +158,7 @@ export default function Nav() {
 
           {/* Mobile burger */}
           <button
-            className="lg:hidden flex flex-col gap-1.5 p-2"
+            className="xl:hidden flex flex-col gap-1.5 p-2"
             onClick={() => setMobileOpen((v) => !v)}
             aria-label="Toggle menu"
           >
@@ -108,58 +177,48 @@ export default function Nav() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-40 bg-bg flex flex-col justify-center px-10"
+            className="fixed inset-0 z-40 bg-bg overflow-y-auto px-8 pt-32 pb-12"
           >
-            {/* Mobile logo */}
-            <div className="absolute top-3 left-5">
-              <Image src="/logo.jpg" alt="Unconventional Group" width={72} height={72} className="h-[72px] w-[72px] [mix-blend-mode:screen]" />
-            </div>
-
-            <nav className="flex flex-col gap-6">
-              {links.map((link, i) =>
-                link.external ? (
-                  <motion.a
-                    key={link.href}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.07 }}
-                    className="font-display text-4xl text-white/50 hover:text-neon transition-colors"
-                  >
-                    {link.label}
-                  </motion.a>
-                ) : (
-                  <motion.div
-                    key={link.href}
-                    initial={{ opacity: 0, x: -30 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.07 }}
-                  >
+            <nav className="flex flex-col gap-8">
+              {dropdowns.map((dd) => (
+                <div key={dd.key} className="flex flex-col gap-3">
+                  <p className="font-display text-xs tracking-[0.3em] text-white/30">{dd.label.toUpperCase()}</p>
+                  {dd.items.map((it) => (
                     <Link
-                      href={link.href}
-                      className={`font-display text-4xl transition-colors ${
-                        pathname === link.href ? "text-neon" : "text-white hover:text-neon"
+                      key={it.href}
+                      href={it.href}
+                      className={`font-display text-2xl transition-colors ${
+                        pathname === it.href ? "text-neon" : "text-white hover:text-neon"
                       }`}
                     >
-                      {link.label}
+                      {it.label}
                     </Link>
-                  </motion.div>
-                )
-              )}
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: links.length * 0.07 }}
+                  ))}
+                </div>
+              ))}
+
+              <div className="h-px bg-white/10" />
+
+              <div className="flex flex-col gap-3">
+                {mainLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className={`font-display text-2xl transition-colors ${
+                      pathname === link.href ? "text-neon" : "text-white hover:text-neon"
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+
+              <Link
+                href="/book"
+                className="inline-block bg-neon text-bg font-display text-2xl px-8 py-3 rounded hover:opacity-90 transition-opacity w-fit"
               >
-                <Link
-                  href="/book"
-                  className="inline-block bg-neon text-bg font-display text-2xl px-8 py-3 rounded hover:opacity-90 transition-colors mt-4"
-                >
-                  BOOK A CALL
-                </Link>
-              </motion.div>
+                BOOK A CALL
+              </Link>
             </nav>
           </motion.div>
         )}

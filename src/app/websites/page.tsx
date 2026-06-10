@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/websites" },
   title: "Website Design & Development — Unconventional Group",
   description:
-    "Custom websites, WordPress/Squarespace builds, and ecommerce stores for Canadian businesses. Starting from $750.",
+    "Custom websites, WordPress/Squarespace builds, and ecommerce stores for Canadian businesses. Most sites delivered in under 5 days.",
 };
 
 const HERO_BG =
@@ -62,8 +62,8 @@ const websiteReviews = [
 const tiers = [
   {
     name: "WordPress / Squarespace",
-    price: "From $750",
-    priceNote: "one-time",
+    price: "Custom Quote",
+    priceNote: "scoped on your free call",
     pitch: "You need to look legit online — fast. This is the fastest way to get there.",
     features: [
       "Template customised to your brand — not just a stock theme dropped in",
@@ -76,8 +76,8 @@ const tiers = [
   },
   {
     name: "Custom Website",
-    price: "From $1,500",
-    priceNote: "one-time",
+    price: "Custom Quote",
+    priceNote: "scoped on your free call",
     pitch: "Your business isn't like everyone else's. Your website shouldn't be either.",
     features: [
       "Built from scratch — zero templates involved",
@@ -92,8 +92,8 @@ const tiers = [
   },
   {
     name: "Ecommerce",
-    price: "From $2,000",
-    priceNote: "one-time",
+    price: "Custom Quote",
+    priceNote: "scoped on your free call",
     pitch: "Ready to sell online? We'll build a store that actually converts.",
     features: [
       "Full store build from the ground up",
@@ -143,7 +143,7 @@ export default function WebsitesPage() {
         headline="YOUR WEBSITE IS EITHER WINNING TRUST OR LOSING IT."
         subhead="Visitors decide in 3 seconds whether you're legit. We make those 3 seconds count — every single time."
         bgUrl={HERO_BG}
-        cta={{ label: "See Website Pricing", href: "#pricing" }}
+        cta={{ label: "See Website Packages", href: "#pricing" }}
       />
 
       {/* Pricing tiers */}
@@ -151,13 +151,13 @@ export default function WebsitesPage() {
         <div className="max-w-7xl mx-auto">
           <AnimateOnScroll>
             <p className="font-display text-xs text-neon tracking-[0.35em] text-center mb-3">
-              PRICING
+              PACKAGES
             </p>
             <h2 className="font-display text-4xl md:text-5xl text-white text-center mb-3 leading-[0.93]">
               PICK YOUR BUILD
             </h2>
             <p className="text-white/40 text-center mb-14 text-sm">
-              Every tier includes optional ongoing maintenance from $200/mo.
+              Every tier includes optional ongoing maintenance. Pricing is scoped on a free 20-minute call.
             </p>
           </AnimateOnScroll>
 
@@ -223,7 +223,7 @@ export default function WebsitesPage() {
                   Ongoing updates, changes, and support for any build. Nothing sits broken.
                 </p>
               </div>
-              <p className="font-display text-neon text-2xl shrink-0">From $200/mo</p>
+              <p className="font-display text-neon text-2xl shrink-0">Scoped to your build</p>
             </div>
           </AnimateOnScroll>
         </div>

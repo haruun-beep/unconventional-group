@@ -193,18 +193,12 @@ export default function AdManagementPage() {
               SIMPLE PRICING. NO SURPRISES.
             </h2>
             <div className="bg-bg border border-white/8 rounded-2xl p-10">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-8">
-                <div className="text-center">
-                  <p className="text-white/45 text-sm mb-2">Typical freelance ads manager</p>
-                  <p className="font-display text-4xl text-white/25 line-through">$1,500–$3,000/mo</p>
-                  <p className="text-white/35 text-xs mt-1">for management alone</p>
-                </div>
-                <div className="text-3xl text-white/25 font-display">VS</div>
-                <div className="text-center">
-                  <p className="text-white/45 text-sm mb-2">Our management fee</p>
-                  <p className="font-display text-5xl text-neon glow">$500/mo</p>
-                  <p className="text-white/35 text-xs mt-1">+ your ad spend (you control the budget)</p>
-                </div>
+              <div className="text-center mb-8">
+                <p className="text-white/45 text-sm mb-2">Our management fee</p>
+                <p className="font-display text-5xl text-neon glow">One Flat Monthly Fee</p>
+                <p className="text-white/35 text-xs mt-2">
+                  + your ad spend (you control the budget) — scoped on a free 20-minute call
+                </p>
               </div>
               <p className="text-white/40 text-sm">
                 Month-to-month. No lock-in. You own all your ad accounts. Cancel anytime.
@@ -231,8 +225,8 @@ export default function AdManagementPage() {
       <section className="bg-surface py-16 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <AnimateOnScroll>
-            <p className="font-display text-6xl text-neon glow mb-2">$500/mo</p>
-            <p className="text-white/40 text-sm mb-1">+ your ad spend</p>
+            <p className="font-display text-6xl text-neon glow mb-2">ONE FLAT FEE</p>
+            <p className="text-white/40 text-sm mb-1">+ your ad spend — scoped on a free call</p>
             <p className="text-white/25 text-xs mb-8">Month-to-month. No lock-in. Cancel anytime.</p>
             <Link
               href="/book"

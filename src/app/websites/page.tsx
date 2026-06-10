@@ -122,7 +122,7 @@ const faqs = [
   },
   {
     q: "How much does a website cost?",
-    a: "It depends on scope — a template-based build, a fully custom site, and an e-commerce store are very different projects. Book the free 20-minute call at unconventionalgroup.ca/book and you'll get a straight answer, no obligation.",
+    a: "Our pricing is public: WordPress/Squarespace builds start at $750, fully custom websites at $1,500, and e-commerce stores at $2,000 — all one-time, with optional maintenance from $200/month. The exact number depends on scope, so book the free 20-minute call at unconventionalgroup.ca/book for a firm quote, no obligation.",
   },
   {
     q: "How are you different from a typical web agency?",
@@ -135,7 +135,7 @@ export default function WebsitesPage() {
     <>
       <ServiceSchema
         name="Website Design & Development"
-        description="Custom websites, WordPress/Squarespace builds, and ecommerce stores for Canadian businesses. Most sites delivered in under 5 days on average."
+        description="Custom websites, WordPress/Squarespace builds, and ecommerce stores for Canadian businesses. Starting from $750, most sites delivered in under 5 days on average."
         path="/websites"
       />
       <PageHero

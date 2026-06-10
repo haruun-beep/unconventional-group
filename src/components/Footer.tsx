@@ -25,7 +25,6 @@ const industryLinks = [
 
 const companyLinks = [
   { label: "Past Work", href: "/our-work" },
-  { label: "Results", href: "/results" },
   { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },
   { label: "Subsidiaries", href: "/subsidiaries" },

@@ -5,7 +5,12 @@ import Image from "next/image";
 import { lockScroll, unlockScroll } from "@/lib/scroll-lock";
 
 function removeSplashCover() {
-  document.getElementById("ug-splash-cover")?.remove();
+  // Hide rather than .remove(): this node is rendered by React in the root
+  // layout, so physically removing it from the DOM corrupts React's
+  // reconciliation and throws insertBefore/removeChild NotFoundError on the
+  // next client-side navigation. Hiding keeps it a child of <body>.
+  const el = document.getElementById("ug-splash-cover");
+  if (el) el.style.display = "none";
 }
 
 const DURATION = 1800; // 1.8s — keep in sync with .ug-ring-draw in globals.css

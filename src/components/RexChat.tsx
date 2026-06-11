@@ -108,6 +108,7 @@ export default function RexChat() {
               <input
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
+                aria-label="Message Rex"
                 placeholder="Ask about pricing, services..."
                 className="flex-1 bg-bg border border-white/10 rounded-lg px-3 py-2 text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-neon transition-colors"
                 disabled={isLoading}
@@ -115,6 +116,7 @@ export default function RexChat() {
               <button
                 type="submit"
                 disabled={isLoading || !input.trim()}
+                aria-label="Send message"
                 className="bg-neon text-bg px-3 py-2 rounded-lg text-sm font-semibold hover:opacity-90 transition-colors disabled:opacity-40"
               >
                 →
@@ -130,7 +132,8 @@ export default function RexChat() {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         className="w-14 h-14 bg-neon rounded-full flex items-center justify-center shadow-lg shadow-neon/30 relative"
-        aria-label="Open chat"
+        aria-label={open ? "Close chat" : "Open chat"}
+        aria-expanded={open}
       >
         <AnimatePresence mode="wait">
           {open ? (

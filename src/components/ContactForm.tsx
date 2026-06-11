@@ -55,8 +55,9 @@ export default function ContactForm() {
 
       <div className="grid sm:grid-cols-2 gap-5">
         <div>
-          <label className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">NAME *</label>
+          <label htmlFor="cf-name" className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">NAME *</label>
           <input
+            id="cf-name"
             name="name"
             required
             className="w-full bg-bg border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-neon transition-colors"
@@ -64,8 +65,9 @@ export default function ContactForm() {
           />
         </div>
         <div>
-          <label className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">EMAIL *</label>
+          <label htmlFor="cf-email" className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">EMAIL *</label>
           <input
+            id="cf-email"
             name="email"
             type="email"
             required
@@ -76,8 +78,9 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">PHONE</label>
+        <label htmlFor="cf-phone" className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">PHONE</label>
         <input
+          id="cf-phone"
           name="phone"
           className="w-full bg-bg border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:border-neon transition-colors"
           placeholder="(optional)"
@@ -85,8 +88,9 @@ export default function ContactForm() {
       </div>
 
       <div>
-        <label className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">WHAT DO YOU NEED? *</label>
+        <label htmlFor="cf-message" className="block font-display text-xs tracking-[0.2em] text-white/50 mb-2">WHAT DO YOU NEED? *</label>
         <textarea
+          id="cf-message"
           name="message"
           required
           rows={5}

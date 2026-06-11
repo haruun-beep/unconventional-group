@@ -18,7 +18,7 @@ const organization = {
   name: "Unconventional Group",
   alternateName: "UGroup",
   url: SITE,
-  logo: `${SITE}/icon.png`,
+  logo: `${SITE}/logo.png`,
   image: `${SITE}/og.jpg`,
   description:
     "Edmonton-based marketing & sales team. Websites, social media, videography, ad management, lead generation, funnels & CRO, AI visibility, and e-commerce growth for businesses across Canada.",

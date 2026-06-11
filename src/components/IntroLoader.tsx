@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { lockScroll, unlockScroll } from "@/lib/scroll-lock";
+
+function removeSplashCover() {
+  document.getElementById("ug-splash-cover")?.remove();
+}
 
 const DURATION = 3000; // 3 seconds — keep in sync with .ug-ring-draw in globals.css
 const FADE = 700; // fade-out duration (ms)
@@ -21,28 +26,41 @@ export default function IntroLoader() {
       seen = false;
     }
     if (seen) {
+      removeSplashCover();
       setShow(false);
       return;
     }
 
     setShow(true);
-    try {
-      sessionStorage.setItem(KEY, "1");
-    } catch {
-      /* private mode — still show once */
-    }
 
-    // Lock scroll while the intro is up
-    const prevOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
+    // Our overlay now covers everything, so the pre-hydration cover can go.
+    removeSplashCover();
+
+    // Lock scroll while the intro is up (ref-counted — coexists with Nav).
+    lockScroll();
+    let locked = true;
+    const unlock = () => {
+      if (locked) {
+        locked = false;
+        unlockScroll();
+      }
+    };
 
     const autoTimer = setTimeout(() => dismiss(), DURATION);
 
     function dismiss() {
+      // Mark seen only once it actually plays, so a closed tab mid-intro still
+      // shows it next session, and React StrictMode's dev double-mount doesn't
+      // suppress it.
+      try {
+        sessionStorage.setItem(KEY, "1");
+      } catch {
+        /* private mode — fine, just shows again next load */
+      }
       setClosing(true);
       setTimeout(() => {
         setShow(false);
-        document.body.style.overflow = prevOverflow;
+        unlock();
       }, FADE);
     }
 
@@ -52,7 +70,7 @@ export default function IntroLoader() {
 
     return () => {
       clearTimeout(autoTimer);
-      document.body.style.overflow = prevOverflow;
+      unlock();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -71,7 +89,7 @@ export default function IntroLoader() {
       aria-label="Loading Unconventional Group"
       onClick={handleSkip}
       className={`ug-intro fixed inset-0 z-[9999] flex cursor-pointer flex-col items-center justify-center transition-opacity duration-700 ${
-        closing ? "opacity-0" : "opacity-100"
+        closing ? "pointer-events-none opacity-0" : "opacity-100"
       }`}
     >
       {/* Logo with tracing progress ring + glow halo */}
@@ -110,15 +128,14 @@ export default function IntroLoader() {
           alt="Unconventional Group"
           width={132}
           height={132}
-          priority
           className="ug-logo relative z-10 rounded-full"
         />
       </div>
 
-      {/* Tagline */}
-      <h1 className="ug-reveal mt-9 px-4 text-center font-display text-3xl uppercase tracking-[0.14em] text-[#39FF14] sm:text-4xl">
+      {/* Tagline (decorative — real page <h1> lives in the hero) */}
+      <p className="ug-reveal mt-9 px-4 text-center font-display text-3xl uppercase tracking-[0.14em] text-[#39FF14] sm:text-4xl">
         Edmonton&apos;s Growth Team
-      </h1>
+      </p>
 
       {/* Divider */}
       <span

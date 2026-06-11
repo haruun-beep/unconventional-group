@@ -346,7 +346,7 @@ export default function Home() {
             </ul>
             <Link
               href="/about"
-              className="inline-block border border-neon text-neon font-bold px-7 py-3 rounded text-sm tracking-wide hover:bg-neon hover:text-bg transition-all duration-200"
+              className="inline-block border border-white/25 text-white px-7 py-3 rounded text-sm tracking-wide hover:border-neon hover:text-neon transition-all duration-200"
             >
               Our Story →
             </Link>

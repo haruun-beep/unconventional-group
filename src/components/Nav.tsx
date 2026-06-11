@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { lockScroll, unlockScroll } from "@/lib/scroll-lock";
 
 const services = [
   { label: "Websites", href: "/websites" },
@@ -75,8 +76,9 @@ export default function Nav() {
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
+    if (!mobileOpen) return;
+    lockScroll();
+    return () => unlockScroll();
   }, [mobileOpen]);
 
   useEffect(() => { setMobileOpen(false); }, [pathname]);

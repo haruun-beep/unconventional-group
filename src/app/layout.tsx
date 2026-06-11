@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import RexChat from "@/components/RexChat";
 import StructuredData from "@/components/StructuredData";
 import IntroLoader from "@/components/IntroLoader";
+import MotionProvider from "@/components/MotionProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,12 +84,27 @@ export default function RootLayout({
   return (
     <html lang="en-CA" className={`${inter.variable} ${bebasNeue.variable}`}>
       <body className="bg-bg text-white font-body antialiased overflow-x-hidden">
+        {/* Pre-hydration splash cover — painted in the initial HTML so the page
+            never flashes before the React intro loader mounts. Removed instantly
+            for returning visitors (intro already seen this session). */}
+        <div id="ug-splash-cover" />
+        <noscript>
+          <style>{`#ug-splash-cover{display:none}`}</style>
+        </noscript>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('ug-intro-seen')==='1'){var e=document.getElementById('ug-splash-cover');if(e)e.remove();}}catch(e){}",
+          }}
+        />
         <StructuredData />
         <IntroLoader />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
-        <RexChat />
+        <MotionProvider>
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+          <RexChat />
+        </MotionProvider>
       </body>
     </html>
   );

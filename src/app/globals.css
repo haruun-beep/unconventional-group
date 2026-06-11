@@ -106,6 +106,15 @@ body {
 
 /* ===== Intro loader ===== */
 
+/* Pre-hydration splash cover — solid black, present in the initial HTML so
+   there is no flash of the page before the React loader mounts. */
+#ug-splash-cover {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: #0a0a0a;
+}
+
 /* Backdrop — subtle neon-tinted radial for depth, fading to pure black */
 .ug-intro {
   background:

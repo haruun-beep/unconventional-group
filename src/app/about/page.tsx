@@ -194,6 +194,32 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Odin */}
+      <section className="bg-bg py-24 px-6">
+        <div className="max-w-3xl mx-auto">
+          <AnimateOnScroll>
+            <div className="bg-surface border border-neon/20 rounded-2xl p-10">
+              <p className="font-display text-xs text-neon tracking-[0.35em] mb-3">THE NEWEST HIRE</p>
+              <h2 className="font-display text-3xl md:text-4xl text-white mb-4 leading-[0.93]">
+                MEET ODIN. HE&apos;S NOT HUMAN.
+              </h2>
+              <div className="w-12 h-[3px] bg-neon mb-6 glow-line" />
+              <p className="text-white/55 text-lg leading-relaxed mb-7">
+                Odin is our AI website auditor — he reads your homepage and hands you a blunt,
+                honest scorecard in about 30 seconds. Mobile, speed, conversion, SEO, trust.
+                Free, and he never sugarcoats.
+              </p>
+              <Link
+                href="/odin"
+                className="inline-block border border-neon text-neon font-bold px-7 py-3 rounded text-sm tracking-wide hover:bg-neon hover:text-bg transition-all duration-200"
+              >
+                Get Your Free Audit →
+              </Link>
+            </div>
+          </AnimateOnScroll>
+        </div>
+      </section>
+
       {/* Subsidiaries */}
       <section className="bg-surface py-24 px-6">
         <div className="max-w-3xl mx-auto">

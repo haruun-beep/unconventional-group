@@ -37,6 +37,7 @@ const dropdowns = [
 const mainLinks = [
   { label: "Past Work", href: "/our-work" },
   { label: "About", href: "/about" },
+  { label: "Free AI Audit", href: "/odin" },
 ];
 
 function Logo({ size = "default" }: { size?: "default" | "small" }) {

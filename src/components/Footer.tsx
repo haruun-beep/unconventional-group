@@ -24,6 +24,7 @@ const industryLinks = [
 ];
 
 const companyLinks = [
+  { label: "Odin — Free AI Audit", href: "/odin" },
   { label: "Past Work", href: "/our-work" },
   { label: "Insights", href: "/insights" },
   { label: "About", href: "/about" },

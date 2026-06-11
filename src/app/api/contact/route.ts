@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { rateLimit, clientIp, originAllowed } from "@/lib/api-guard";
+import { sendLeadToCrm } from "@/lib/crm";
 
 export const runtime = "nodejs";
 
@@ -45,6 +46,17 @@ export async function POST(req: Request) {
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
     return Response.json({ error: "That email doesn't look right." }, { status: 400 });
   }
+
+  // Log to the CRM queue first (best-effort) so the lead is captured even if
+  // email delivery isn't configured or fails below.
+  await sendLeadToCrm({
+    company: name,
+    contact_name: name,
+    email,
+    phone,
+    source: "site_contact_form",
+    consent: "implied_inquiry",
+  });
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {

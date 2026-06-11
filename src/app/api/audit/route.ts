@@ -2,6 +2,7 @@ import { generateText } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { Resend } from "resend";
 import { rateLimit, clientIp, originAllowed } from "@/lib/api-guard";
+import { sendLeadToCrm } from "@/lib/crm";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -376,22 +377,30 @@ export async function POST(req: Request) {
     );
   }
 
-  // Internal lead notification to the UGroup team — clean, readable text.
-  // We do not email the prospect directly; the team follows up with their copy.
-  const apiKey = process.env.RESEND_API_KEY;
-  if (apiKey) {
-    try {
+  // Lead delivery — email the team (full detail) AND log to the CRM queue.
+  // Both are best-effort and run together; neither blocks the visitor's report.
+  const overall = overallScore(report.scores);
+  await Promise.allSettled([
+    (async () => {
+      const apiKey = process.env.RESEND_API_KEY;
+      if (!apiKey) return;
       await new Resend(apiKey).emails.send({
         from: LEAD_FROM,
         to: [LEAD_TO],
         replyTo: email,
-        subject: `Odin lead — ${target.hostname} (${overallScore(report.scores)}/5)`,
+        subject: `Odin lead — ${target.hostname} (${overall}/5)`,
         text: buildLeadText(report, { url: signals.finalUrl, platform: signals.platform }, email),
       });
-    } catch {
-      // Lead email failing should never break the audit response.
-    }
-  }
+    })(),
+    sendLeadToCrm({
+      company: target.hostname.replace(/^www\./, ""),
+      email,
+      website: signals.finalUrl,
+      source: "site_odin_audit",
+      source_query: `Odin audit — ${overall}/5`,
+      consent: "implied_inquiry",
+    }),
+  ]);
 
   return Response.json({ report, site: { url: signals.finalUrl, title: signals.title, platform: signals.platform } });
 }

@@ -2,6 +2,7 @@ import { generateText } from "ai";
 import { anthropic } from "@ai-sdk/anthropic";
 import { Resend } from "resend";
 import { rateLimit, clientIp, originAllowed } from "@/lib/api-guard";
+import { sendLeadToCrm } from "@/lib/crm";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
@@ -230,10 +231,12 @@ export async function POST(req: Request) {
     out.recommendations = [{ slug: "websites", why: "A strong, conversion-focused website is the foundation everything else builds on." }];
   }
 
-  // Internal lead email — clean text, never blocks the response.
-  const apiKey = process.env.RESEND_API_KEY;
-  if (apiKey) {
-    try {
+  // Lead delivery — email the team (full detail) AND log to the CRM queue.
+  // Both best-effort; neither blocks the visitor's recommendation.
+  await Promise.allSettled([
+    (async () => {
+      const apiKey = process.env.RESEND_API_KEY;
+      if (!apiKey) return;
       await new Resend(apiKey).emails.send({
         from: LEAD_FROM,
         to: [LEAD_TO],
@@ -241,10 +244,18 @@ export async function POST(req: Request) {
         subject: `Solution Finder lead — ${name}${businessType ? ` (${businessType})` : ""}`,
         text: buildLeadText({ businessType, goals, problem, name, email, phone }, out),
       });
-    } catch {
-      // ignore — lead email must not break the response
-    }
-  }
+    })(),
+    sendLeadToCrm({
+      company: name,
+      contact_name: name,
+      email,
+      phone,
+      industry: businessType || undefined,
+      source: "site_solution_finder",
+      source_query: goals.length ? goals.join(", ").slice(0, 200) : undefined,
+      consent: "implied_inquiry",
+    }),
+  ]);
 
   // Shape the response for the client (resolve slugs to names/hrefs).
   return Response.json({

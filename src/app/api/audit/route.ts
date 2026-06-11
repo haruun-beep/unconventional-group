@@ -169,28 +169,28 @@ async function fetchSignals(target: URL): Promise<PageSignals | { error: string 
 
 // ---------- The Odin audit ----------
 
-const AUDIT_SYSTEM = `You are Odin, the AI website auditor for Unconventional Group — an Edmonton-based marketing & sales team (never call it an "agency") serving businesses across Canada. You audit a business's homepage from extracted signals and produce a blunt, specific, HONEST report.
+const AUDIT_SYSTEM = `You are Odin, the website-audit system for Unconventional Group — an Edmonton-based marketing & sales team (never call it an "agency") serving businesses across Canada. You analyze a business's homepage from extracted signals and produce a precise, specific, professional assessment.
 
-Scoring: rate each category 1-5 (5 = excellent, leave it alone):
-- mobile: viewport tag, signs of responsive design
-- modernity: platform, page weight signals, overall era of the build
-- conversion: clear CTA, visible phone (tel: link), contact form, persuasive copy
-- seo: title quality, meta description, H1 structure, schema (JSON-LD), OG tags, image alts
-- trust: reviews/testimonials mentioned, real specifics vs generic filler, HTTPS, professional copy
+Scoring: rate each dimension 1-5 (5 = excellent, no action needed):
+- mobile: viewport configuration, signs of responsive design
+- modernity: platform, page weight signals, overall technical foundation
+- conversion: clear calls-to-action, visible phone (tel: link), contact form, persuasive structure
+- seo: title quality, meta description, H1 structure, schema (JSON-LD), OG tags, image alt coverage
+- trust: reviews/testimonials present, specific proof vs generic filler, HTTPS, professional presentation
 
 Rules:
-- Be SPECIFIC and TRUE to the actual signals given. Quote their real title/H1 when relevant. Never invent facts about the site.
-- If the site is genuinely strong, say so and score it high — do not manufacture problems. Credibility is the whole point.
-- NEVER mention prices, costs, estimates, or dollar amounts of any kind. If relevant, the next step is always the free 20-minute call.
-- Plain language a business owner understands. "Your phone number isn't clickable on mobile" not "suboptimal tel: anchor implementation".
-- The homepage signals are limited — judge only what you can see; do not claim to have checked inner pages or page speed metrics.
+- Be SPECIFIC and TRUE to the actual signals given. Reference their real title/H1 when relevant. Never invent facts about the site.
+- If the site is genuinely strong, say so and score it high — do not manufacture problems. Credibility is the entire value of this assessment.
+- NEVER mention prices, costs, estimates, or dollar amounts of any kind. The recommended next step is always a complimentary 20-minute call.
+- Write in a professional, consultative tone — clear and accessible to a business owner, technical only where it adds precision. Avoid slang, hype, and dramatic phrasing.
+- The signals cover the homepage only — assess what is observable; do not claim to have reviewed inner pages or measured page-load performance.
 
 Respond with ONLY valid JSON, no markdown fences, in exactly this shape:
 {
   "scores": { "mobile": 1-5, "modernity": 1-5, "conversion": 1-5, "seo": 1-5, "trust": 1-5 },
-  "working": ["up to 3 short specific things the site does well"],
-  "problems": ["up to 3 short specific problems, most costly first"],
-  "verdict": "2-3 blunt sentences: overall read + what it likely costs them in missed business (in jobs/leads terms, never dollars) + whether a rebuild is worth a conversation"
+  "working": ["up to 3 specific strengths"],
+  "problems": ["up to 3 specific issues, highest-impact first"],
+  "verdict": "2-3 measured, consultative sentences: the overall assessment + the likely business impact (in terms of lost leads or conversions, never dollars) + whether the priorities are best addressed through refinement or a rebuild"
 }`;
 
 type AuditReport = {
@@ -241,13 +241,13 @@ export async function POST(req: Request) {
   const dayOk = await rateLimit(`audit:d:${ip}`, IP_DAILY_LIMIT, 24 * 60 * 60 * 1000);
   if (!hourOk || !dayOk) {
     return Response.json(
-      { error: "Odin's ravens need a rest — you've hit the audit limit. Try again later, or book a free call and we'll go deeper than any robot can." },
+      { error: "You've reached the audit limit for now. Please try again later — or book a free call for a deeper, human-led review." },
       { status: 429 }
     );
   }
   if (!(await rateLimit("audit:global", GLOBAL_DAILY_LIMIT, 24 * 60 * 60 * 1000))) {
     return Response.json(
-      { error: "Odin's fully booked today — every audit slot is gone. Try again tomorrow, or skip the line and book a free call." },
+      { error: "The audit service is at capacity today. Please try again tomorrow, or book a free call to review your site with our team." },
       { status: 429 }
     );
   }
@@ -283,7 +283,7 @@ export async function POST(req: Request) {
 
   if (!process.env.ANTHROPIC_API_KEY) {
     return Response.json(
-      { error: "Odin is offline for maintenance. Book a free call and we'll audit your site personally." },
+      { error: "The audit service is temporarily unavailable. Please book a free call and we'll review your site personally." },
       { status: 503 }
     );
   }
@@ -292,8 +292,8 @@ export async function POST(req: Request) {
   if ("error" in signals) {
     const msg =
       signals.error === "not-html"
-        ? "That address didn't return a normal webpage. Double-check the URL and try again."
-        : "Odin's ravens couldn't reach that site. Check the address and try again.";
+        ? "That address didn't return a standard webpage. Please check the URL and try again."
+        : "We couldn't reach that site. Please check the address and try again.";
     return Response.json({ error: msg }, { status: 422 });
   }
 
@@ -318,7 +318,7 @@ export async function POST(req: Request) {
 
   if (!report) {
     return Response.json(
-      { error: "Odin hit a snag mid-audit. Try again in a minute — or book a free call and we'll do it live." },
+      { error: "The analysis didn't complete. Please try again in a moment — or book a free call for a human-led review." },
       { status: 502 }
     );
   }

@@ -13,20 +13,20 @@ type Report = {
 type Site = { url: string; title: string; platform: string };
 
 const SCORE_LABELS: { key: keyof Report["scores"]; label: string }[] = [
-  { key: "mobile", label: "Mobile" },
-  { key: "modernity", label: "Speed & Modernity" },
+  { key: "mobile", label: "Mobile Experience" },
+  { key: "modernity", label: "Performance & Build" },
   { key: "conversion", label: "Conversion" },
-  { key: "seo", label: "SEO Basics" },
-  { key: "trust", label: "Trust" },
+  { key: "seo", label: "Search Visibility" },
+  { key: "trust", label: "Credibility" },
 ];
 
 const LOADING_LINES = [
-  "Odin's ravens are flying to your site…",
-  "Reading your homepage, word for word…",
-  "Checking how you look on a phone…",
-  "Hunting for your call-to-action…",
-  "Scoring you on five fronts…",
-  "Odin is forming his verdict…",
+  "Fetching your homepage…",
+  "Analyzing mobile responsiveness…",
+  "Evaluating conversion paths…",
+  "Assessing search visibility…",
+  "Reviewing credibility signals…",
+  "Compiling your report…",
 ];
 
 function scoreColor(n: number) {
@@ -141,7 +141,7 @@ export default function OdinAudit() {
             disabled={loading}
             className="bg-neon text-bg font-bold px-8 py-4 rounded text-sm tracking-wide hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >
-            {loading ? "Auditing…" : "Release the Ravens →"}
+            {loading ? "Analyzing…" : "Run the Audit"}
           </button>
 
           {loading && (
@@ -150,8 +150,8 @@ export default function OdinAudit() {
           {error && <p className="text-red-400 text-sm">{error}</p>}
 
           <p className="text-white/35 text-xs leading-relaxed">
-            Free. Takes about 30 seconds. Odin reads your live homepage — nothing is installed,
-            nothing is changed. Limit of a couple of audits per visitor so he can keep up.
+            Free, in approximately 30 seconds. The Odin system reads your live homepage only —
+            nothing is installed or modified. Limited to a few analyses per visitor.
           </p>
         </form>
       )}
@@ -159,7 +159,7 @@ export default function OdinAudit() {
       {report && (
         <div className="flex flex-col gap-8">
           <div>
-            <p className="font-display text-xs text-neon tracking-[0.35em] mb-2">ODIN&apos;S REPORT</p>
+            <p className="font-display text-xs text-neon tracking-[0.35em] mb-2">ODIN SYSTEM · REPORT</p>
             <h3 className="font-display text-2xl md:text-3xl text-white leading-tight">
               {site?.title || site?.url || "Your site"}
             </h3>
@@ -192,7 +192,7 @@ export default function OdinAudit() {
           <div className="grid md:grid-cols-2 gap-6">
             {report.working.length > 0 && (
               <div>
-                <p className="font-display text-sm text-white tracking-wide mb-3">WHAT&apos;S WORKING</p>
+                <p className="font-display text-sm text-white tracking-wide mb-3">STRENGTHS</p>
                 <ul className="flex flex-col gap-2.5">
                   {report.working.map((w, i) => (
                     <li key={i} className="text-white/60 text-sm leading-relaxed flex gap-2.5">
@@ -204,7 +204,7 @@ export default function OdinAudit() {
             )}
             {report.problems.length > 0 && (
               <div>
-                <p className="font-display text-sm text-white tracking-wide mb-3">WHAT&apos;S COSTING YOU</p>
+                <p className="font-display text-sm text-white tracking-wide mb-3">ISSUES TO ADDRESS</p>
                 <ul className="flex flex-col gap-2.5">
                   {report.problems.map((p, i) => (
                     <li key={i} className="text-white/60 text-sm leading-relaxed flex gap-2.5">
@@ -217,19 +217,19 @@ export default function OdinAudit() {
           </div>
 
           <div className="bg-bg border border-white/10 rounded-xl p-6">
-            <p className="font-display text-xs text-neon tracking-[0.35em] mb-3">THE VERDICT</p>
+            <p className="font-display text-xs text-neon tracking-[0.35em] mb-3">SUMMARY</p>
             <p className="text-white/70 leading-relaxed">{report.verdict}</p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <Link
               href="/book"
-              className="inline-block bg-neon text-bg font-bold px-8 py-4 rounded text-sm tracking-wide hover:opacity-90 transition-opacity"
+              className="inline-block bg-neon text-bg font-bold px-8 py-4 rounded text-sm tracking-wide hover:opacity-90 transition-opacity shrink-0"
             >
-              Fix This — Book a Free Call
+              Book a Strategy Call
             </Link>
             <p className="text-white/40 text-sm leading-relaxed">
-              20 minutes with the humans. We&apos;ll walk through Odin&apos;s findings and tell you
+              A complimentary 20-minute call. We&apos;ll review these findings in detail and outline
               exactly what we&apos;d do — no obligation.
             </p>
           </div>

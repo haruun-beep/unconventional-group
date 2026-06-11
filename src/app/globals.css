@@ -106,85 +106,87 @@ body {
 
 /* ===== Intro loader ===== */
 
-/* Logo glow pulse */
-@keyframes ug-logo-pulse {
-  0%, 100% {
-    transform: scale(1);
-    filter: drop-shadow(0 0 14px rgba(57, 255, 20, 0.55))
-            drop-shadow(0 0 36px rgba(57, 255, 20, 0.25));
-  }
-  50% {
-    transform: scale(1.05);
-    filter: drop-shadow(0 0 26px rgba(57, 255, 20, 0.9))
-            drop-shadow(0 0 64px rgba(57, 255, 20, 0.45));
-  }
-}
-.ug-logo-pulse {
-  animation: ug-logo-pulse 2.4s ease-in-out infinite;
+/* Backdrop — subtle neon-tinted radial for depth, fading to pure black */
+.ug-intro {
+  background:
+    radial-gradient(circle at 50% 42%, rgba(57, 255, 20, 0.08), rgba(10, 10, 10, 0) 42%),
+    #0a0a0a;
 }
 
-/* Radiating beams expanding out from behind the logo */
-@keyframes ug-beam {
-  0% {
-    transform: scale(0.6);
-    opacity: 0.7;
+/* Soft "beaming" halo behind the logo */
+@keyframes ug-halo {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(0.92);
   }
-  100% {
-    transform: scale(2.6);
-    opacity: 0;
+  50% {
+    opacity: 0.7;
+    transform: scale(1.08);
   }
 }
-.ug-beam {
+.ug-halo {
   position: absolute;
   width: 150px;
   height: 150px;
   border-radius: 9999px;
-  border: 2px solid rgba(57, 255, 20, 0.6);
-  animation: ug-beam 2.8s ease-out infinite;
+  background: radial-gradient(circle, rgba(57, 255, 20, 0.45), rgba(57, 255, 20, 0) 70%);
+  filter: blur(14px);
+  animation: ug-halo 2.6s ease-in-out infinite;
 }
-.ug-beam-2 {
-  animation-delay: 0.9s;
+
+/* Logo — gentle glow breathe */
+@keyframes ug-logo {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(57, 255, 20, 0.35));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(57, 255, 20, 0.65));
+  }
 }
-.ug-beam-3 {
-  animation-delay: 1.8s;
+.ug-logo {
+  animation: ug-logo 2.6s ease-in-out infinite;
+}
+
+/* Progress ring traces around the logo over the intro duration */
+@keyframes ug-ring-draw {
+  0% { stroke-dashoffset: 578; }
+  100% { stroke-dashoffset: 0; }
+}
+.ug-ring-draw {
+  stroke-dasharray: 578; /* 2π × r(92) ≈ 578 */
+  stroke-dashoffset: 578;
+  animation: ug-ring-draw 3s linear forwards;
+  filter: drop-shadow(0 0 4px rgba(57, 255, 20, 0.6));
 }
 
 /* Text reveal */
-@keyframes ug-fade-up {
+@keyframes ug-reveal {
   0% {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(14px);
   }
   100% {
     opacity: 1;
     transform: translateY(0);
   }
 }
-.ug-fade-up {
-  animation: ug-fade-up 0.9s ease-out 0.4s both;
+.ug-reveal {
+  animation: ug-reveal 0.8s ease-out 0.35s both;
 }
-.ug-fade-up-2 {
-  animation: ug-fade-up 0.9s ease-out 0.9s both;
-}
-
-/* 10-second loading bar */
-@keyframes ug-loadbar {
-  0% { transform: translateX(-100%); }
-  100% { transform: translateX(0); }
-}
-.ug-loadbar {
-  width: 100%;
-  transform-origin: left;
-  animation: ug-loadbar 10s linear forwards;
+.ug-reveal-2 {
+  animation: ug-reveal 0.8s ease-out 0.7s both;
 }
 
 /* Respect reduced-motion */
 @media (prefers-reduced-motion: reduce) {
-  .ug-logo-pulse,
-  .ug-beam,
-  .ug-fade-up,
-  .ug-fade-up-2 {
+  .ug-halo,
+  .ug-logo,
+  .ug-ring-draw,
+  .ug-reveal,
+  .ug-reveal-2 {
     animation: none;
   }
-  .ug-beam { opacity: 0; }
+  .ug-ring-draw {
+    stroke-dashoffset: 0;
+  }
 }

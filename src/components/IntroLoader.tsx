@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-const DURATION = 10000; // 10 seconds
+const DURATION = 3000; // 3 seconds — keep in sync with .ug-ring-draw in globals.css
 const FADE = 700; // fade-out duration (ms)
 const KEY = "ug-intro-seen";
 
@@ -46,7 +46,7 @@ export default function IntroLoader() {
       }, FADE);
     }
 
-    // Expose dismiss for the skip button
+    // Expose dismiss for the skip handler
     (window as unknown as { __ugDismissIntro?: () => void }).__ugDismissIntro =
       dismiss;
 
@@ -70,45 +70,71 @@ export default function IntroLoader() {
       aria-live="polite"
       aria-label="Loading Unconventional Group"
       onClick={handleSkip}
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0a0a0a] cursor-pointer transition-opacity duration-700 ${
+      className={`ug-intro fixed inset-0 z-[9999] flex cursor-pointer flex-col items-center justify-center transition-opacity duration-700 ${
         closing ? "opacity-0" : "opacity-100"
       }`}
     >
-      {/* Beaming logo */}
-      <div className="relative flex items-center justify-center">
-        {/* Radiating beams */}
-        <span className="ug-beam" />
-        <span className="ug-beam ug-beam-2" />
-        <span className="ug-beam ug-beam-3" />
+      {/* Logo with tracing progress ring + glow halo */}
+      <div className="relative flex h-[200px] w-[200px] items-center justify-center">
+        {/* Soft beaming halo */}
+        <span className="ug-halo" aria-hidden="true" />
+
+        {/* Progress ring (rotated so it starts at 12 o'clock) */}
+        <svg
+          className="absolute inset-0 -rotate-90"
+          viewBox="0 0 200 200"
+          aria-hidden="true"
+        >
+          <circle
+            cx="100"
+            cy="100"
+            r="92"
+            fill="none"
+            stroke="rgba(255,255,255,0.08)"
+            strokeWidth="2"
+          />
+          <circle
+            className="ug-ring-draw"
+            cx="100"
+            cy="100"
+            r="92"
+            fill="none"
+            stroke="#39FF14"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          />
+        </svg>
 
         <Image
           src="/logo.png"
           alt="Unconventional Group"
-          width={150}
-          height={150}
+          width={132}
+          height={132}
           priority
-          className="ug-logo-pulse relative z-10 rounded-full"
+          className="ug-logo relative z-10 rounded-full"
         />
       </div>
 
       {/* Tagline */}
-      <h1 className="ug-fade-up mt-10 font-display text-3xl sm:text-4xl tracking-[0.2em] uppercase text-[#39FF14] glow text-center px-4">
+      <h1 className="ug-reveal mt-9 px-4 text-center font-display text-3xl uppercase tracking-[0.14em] text-[#39FF14] sm:text-4xl">
         Edmonton&apos;s Growth Team
       </h1>
 
+      {/* Divider */}
+      <span
+        className="ug-reveal mt-4 h-px w-12 bg-[#39FF14]/40"
+        aria-hidden="true"
+      />
+
       {/* Slogan */}
-      <p className="ug-fade-up-2 mt-3 font-body text-lg sm:text-xl text-white/80 text-center px-4">
-        We&apos;re all about <span className="text-[#39FF14] font-semibold">YOU!</span>
+      <p className="ug-reveal-2 mt-4 px-4 text-center font-body text-base text-white/70 sm:text-lg">
+        We&apos;re all about{" "}
+        <span className="font-semibold text-white">YOU!</span>
       </p>
 
-      {/* Loading bar */}
-      <div className="ug-fade-up-2 mt-10 h-[3px] w-48 overflow-hidden rounded-full bg-white/10">
-        <span className="ug-loadbar block h-full bg-[#39FF14]" />
-      </div>
-
-      {/* Skip */}
-      <span className="ug-fade-up-2 mt-6 text-xs uppercase tracking-widest text-white/40">
-        Tap anywhere to skip
+      {/* Skip hint */}
+      <span className="ug-reveal-2 absolute bottom-8 text-[11px] uppercase tracking-[0.2em] text-white/30">
+        Tap to skip
       </span>
     </div>
   );

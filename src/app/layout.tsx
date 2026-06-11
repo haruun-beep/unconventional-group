@@ -5,6 +5,7 @@ import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
 import RexChat from "@/components/RexChat";
 import StructuredData from "@/components/StructuredData";
+import IntroLoader from "@/components/IntroLoader";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -83,6 +84,7 @@ export default function RootLayout({
     <html lang="en-CA" className={`${inter.variable} ${bebasNeue.variable}`}>
       <body className="bg-bg text-white font-body antialiased overflow-x-hidden">
         <StructuredData />
+        <IntroLoader />
         <Nav />
         <main>{children}</main>
         <Footer />

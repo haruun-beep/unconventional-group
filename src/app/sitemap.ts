@@ -33,6 +33,7 @@ const routes: Route[] = [
   { path: "/insights/facebook-ads-for-contractors-alberta", priority: 0.7, freq: "yearly" },
   { path: "/insights/ai-visibility-aeo-geo-guide", priority: 0.7, freq: "yearly" },
   { path: "/odin", priority: 0.8, freq: "monthly", modified: new Date("2026-06-10") },
+  { path: "/start", priority: 0.8, freq: "monthly", modified: new Date("2026-06-10") },
   { path: "/our-work", priority: 0.7, freq: "monthly" },
   { path: "/about", priority: 0.6, freq: "monthly" },
   { path: "/subsidiaries", priority: 0.5, freq: "monthly" },

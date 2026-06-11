@@ -4,6 +4,7 @@ import AnimateOnScroll from "@/components/AnimateOnScroll";
 import TestimonialCard from "@/components/TestimonialCard";
 import CTASection from "@/components/CTASection";
 import FAQ from "@/components/FAQ";
+import WaysToStart from "@/components/WaysToStart";
 
 const DESK_PHOTO =
   "https://images.squarespace-cdn.com/content/v1/6964898274230030ca027d02/1768609069084-IEWNEZZR5K59B6RFOWQH/unsplash-image-DtDlVpy-vvQ.jpg";
@@ -353,37 +354,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Odin — free audit band */}
-      <section className="bg-surface border-t border-white/8 py-16 px-6">
-        <div className="max-w-5xl mx-auto">
-          <AnimateOnScroll>
-            <div className="relative bg-bg border border-neon/20 rounded-2xl p-8 md:p-12 overflow-hidden">
-              <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-neon/40 to-transparent" />
-              <div className="grid md:grid-cols-[1fr_auto] gap-8 md:gap-12 items-center">
-                <div>
-                  <p className="font-display text-xs text-neon tracking-[0.35em] mb-3">
-                    THE ODIN SYSTEM
-                  </p>
-                  <h2 className="font-display text-3xl md:text-4xl text-white leading-[0.95] mb-4">
-                    GET A FREE WEBSITE AUDIT.
-                  </h2>
-                  <p className="text-white/55 text-base leading-relaxed max-w-xl">
-                    Our Odin system analyzes your homepage across five performance dimensions —
-                    mobile, performance, conversion, search visibility, and credibility — and
-                    returns a structured scorecard in about 30 seconds. No obligation.
-                  </p>
-                </div>
-                <Link
-                  href="/odin"
-                  className="inline-block bg-neon text-bg font-bold px-8 py-4 rounded text-sm tracking-wide hover:opacity-90 transition-opacity whitespace-nowrap shrink-0"
-                >
-                  Run a Free Audit →
-                </Link>
-              </div>
-            </div>
-          </AnimateOnScroll>
-        </div>
-      </section>
+      {/* Three ways to start */}
+      <WaysToStart />
 
       {/* Industries We Serve */}
       <section className="bg-surface py-28 px-6 border-t border-white/8">

@@ -229,6 +229,59 @@ function parseReport(raw: string): AuditReport | null {
   }
 }
 
+// ---------- Lead email (internal, plain text) ----------
+
+const SCORE_LABELS: { key: keyof AuditReport["scores"]; label: string }[] = [
+  { key: "mobile", label: "Mobile Experience" },
+  { key: "modernity", label: "Performance & Build" },
+  { key: "conversion", label: "Conversion" },
+  { key: "seo", label: "Search Visibility" },
+  { key: "trust", label: "Credibility" },
+];
+
+function overallScore(s: AuditReport["scores"]): string {
+  return ((s.mobile + s.modernity + s.conversion + s.seo + s.trust) / 5).toFixed(1);
+}
+
+function buildLeadText(
+  report: AuditReport,
+  site: { url: string; platform: string },
+  prospectEmail: string
+): string {
+  const bar = (n: number) => "█".repeat(n) + "░".repeat(5 - n);
+  const lines: string[] = [
+    "ODIN AUDIT — NEW LEAD",
+    "═════════════════════",
+    "",
+    `Prospect:  ${prospectEmail}`,
+    `Website:   ${site.url}`,
+  ];
+  if (site.platform && site.platform !== "unknown") lines.push(`Platform:  ${site.platform}`);
+  lines.push(
+    "",
+    `OVERALL:   ${overallScore(report.scores)} / 5`,
+    "",
+    "SCORES",
+    "──────",
+    ...SCORE_LABELS.map(({ key, label }) => `${bar(report.scores[key])}  ${report.scores[key]}/5  ${label}`),
+    "",
+    "STRENGTHS",
+    "─────────",
+    ...(report.working.length ? report.working.map((w) => `  + ${w}`) : ["  (none noted)"]),
+    "",
+    "ISSUES TO ADDRESS",
+    "─────────────────",
+    ...(report.problems.length ? report.problems.map((p) => `  - ${p}`) : ["  (none noted)"]),
+    "",
+    "SUMMARY",
+    "───────",
+    report.verdict,
+    "",
+    "Book a call:  https://www.unconventionalgroup.ca/book"
+  );
+  return lines.join("\n");
+}
+
 // ---------- Route ----------
 
 export async function POST(req: Request) {
@@ -323,34 +376,17 @@ export async function POST(req: Request) {
     );
   }
 
-  // Lead notification to Haruun — never block the user's report on it.
+  // Internal lead notification to the UGroup team — clean, readable text.
+  // We do not email the prospect directly; the team follows up with their copy.
   const apiKey = process.env.RESEND_API_KEY;
   if (apiKey) {
-    const s = report.scores;
-    const overall = ((s.mobile + s.modernity + s.conversion + s.seo + s.trust) / 5).toFixed(1);
     try {
       await new Resend(apiKey).emails.send({
         from: LEAD_FROM,
         to: [LEAD_TO],
         replyTo: email,
-        subject: `Odin lead — ${target.hostname} (${overall}/5)`,
-        text: [
-          `Email:    ${email}`,
-          `Website:  ${signals.finalUrl}`,
-          `Platform: ${signals.platform}`,
-          ``,
-          `Scores: mobile ${s.mobile} · modernity ${s.modernity} · conversion ${s.conversion} · seo ${s.seo} · trust ${s.trust} (overall ${overall}/5)`,
-          ``,
-          `Working:`,
-          ...report.working.map((w) => `  + ${w}`),
-          ``,
-          `Problems:`,
-          ...report.problems.map((p) => `  - ${p}`),
-          ``,
-          `Verdict: ${report.verdict}`,
-          ``,
-          `— Odin, unconventionalgroup.ca/odin`,
-        ].join("\n"),
+        subject: `Odin lead — ${target.hostname} (${overallScore(report.scores)}/5)`,
+        text: buildLeadText(report, { url: signals.finalUrl, platform: signals.platform }, email),
       });
     } catch {
       // Lead email failing should never break the audit response.

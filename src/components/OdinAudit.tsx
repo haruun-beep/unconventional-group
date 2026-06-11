@@ -221,6 +221,13 @@ export default function OdinAudit() {
             <p className="text-white/70 leading-relaxed">{report.verdict}</p>
           </div>
 
+          <div className="bg-bg border border-neon/20 rounded-xl p-4">
+            <p className="text-white/55 text-sm leading-relaxed">
+              <span className="text-neon">✓</span> Our team will send a copy of this report to{" "}
+              <span className="text-white/80">{email || "your email"}</span> as well.
+            </p>
+          </div>
+
           <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
             <Link
               href="/book"

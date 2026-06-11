@@ -164,7 +164,7 @@ body {
 .ug-ring-draw {
   stroke-dasharray: 578; /* 2π × r(92) ≈ 578 */
   stroke-dashoffset: 578;
-  animation: ug-ring-draw 3s linear forwards;
+  animation: ug-ring-draw 1.8s linear forwards;
   filter: drop-shadow(0 0 4px rgba(57, 255, 20, 0.6));
 }
 

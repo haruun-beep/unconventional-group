@@ -94,7 +94,7 @@ export default function RootLayout({
         <script
           dangerouslySetInnerHTML={{
             __html:
-              "try{if(sessionStorage.getItem('ug-intro-seen')==='1'){var e=document.getElementById('ug-splash-cover');if(e)e.remove();}}catch(e){}",
+              "try{if(sessionStorage.getItem('ug-intro-seen')==='1'){var e=document.getElementById('ug-splash-cover');if(e)e.remove();}}catch(e){}setTimeout(function(){var c=document.getElementById('ug-splash-cover');if(c)c.remove();},6000);",
           }}
         />
         <StructuredData />

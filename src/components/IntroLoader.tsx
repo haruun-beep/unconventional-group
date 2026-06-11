@@ -8,7 +8,7 @@ function removeSplashCover() {
   document.getElementById("ug-splash-cover")?.remove();
 }
 
-const DURATION = 3000; // 3 seconds — keep in sync with .ug-ring-draw in globals.css
+const DURATION = 1800; // 1.8s — keep in sync with .ug-ring-draw in globals.css
 const FADE = 700; // fade-out duration (ms)
 const KEY = "ug-intro-seen";
 

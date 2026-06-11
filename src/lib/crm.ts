@@ -52,13 +52,19 @@ export async function sendLeadToCrm(lead: CrmLead): Promise<void> {
     const raw = JSON.stringify(clean);
     const sig = crypto.createHmac("sha256", secret).update(raw).digest("hex");
 
-    await fetch(CRM_URL, {
+    const res = await fetch(CRM_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-signature": sig },
       body: raw,
       signal: AbortSignal.timeout(8000),
     });
-  } catch {
+    // Log outcome (status only — never the secret) so issues are visible in
+    // Vercel runtime logs. 401 = secret mismatch; 5xx = CRM-side problem.
+    if (!res.ok) {
+      console.error(`crm ingest: non-OK ${res.status} for source=${clean.source ?? "?"}`);
+    }
+  } catch (err) {
     // Best-effort only. Email remains the backup record of every lead.
+    console.error("crm ingest: request failed —", err instanceof Error ? err.message : err);
   }
 }

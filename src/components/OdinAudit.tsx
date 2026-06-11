@@ -7,6 +7,7 @@ type Report = {
   scores: { mobile: number; modernity: number; conversion: number; seo: number; trust: number };
   working: string[];
   problems: string[];
+  bottomLine: string;
   verdict: string;
 };
 
@@ -189,6 +190,13 @@ export default function OdinAudit() {
             </div>
           </div>
 
+          {report.bottomLine && (
+            <div className="bg-neon/5 border-l-2 border-neon rounded-r-xl px-6 py-5">
+              <p className="font-display text-xs text-neon tracking-[0.35em] mb-2">THE BOTTOM LINE</p>
+              <p className="text-white text-lg leading-snug font-medium">{report.bottomLine}</p>
+            </div>
+          )}
+
           <div className="grid md:grid-cols-2 gap-6">
             {report.working.length > 0 && (
               <div>
@@ -204,7 +212,7 @@ export default function OdinAudit() {
             )}
             {report.problems.length > 0 && (
               <div>
-                <p className="font-display text-sm text-white tracking-wide mb-3">ISSUES TO ADDRESS</p>
+                <p className="font-display text-sm text-white tracking-wide mb-3">WHAT&apos;S COSTING YOU JOBS</p>
                 <ul className="flex flex-col gap-2.5">
                   {report.problems.map((p, i) => (
                     <li key={i} className="text-white/60 text-sm leading-relaxed flex gap-2.5">

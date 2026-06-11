@@ -28,17 +28,22 @@ const industries = [
   { label: "Real Estate", href: "/industries/real-estate" },
 ];
 
+const start = [
+  { label: "Free Audit", href: "/odin" },
+  { label: "Find Your Solution", href: "/start" },
+  { label: "Book a Call", href: "/book" },
+];
+
 const dropdowns = [
   { key: "services", label: "Services", items: services },
   { key: "growth", label: "Growth", items: growth },
   { key: "industries", label: "Industries", items: industries },
+  { key: "start", label: "Start", items: start },
 ];
 
 const mainLinks = [
   { label: "Past Work", href: "/our-work" },
   { label: "About", href: "/about" },
-  { label: "Free Audit", href: "/odin" },
-  { label: "Find Your Solution", href: "/start" },
 ];
 
 function Logo({ size = "default" }: { size?: "default" | "small" }) {
